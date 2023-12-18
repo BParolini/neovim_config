@@ -1,0 +1,12 @@
+*.insyncdl
+Thumbs.db
+.DS_Store
+.uuid
+.directory
+desktop.ini
+.idea
+.fleet
+*_compiled.lua
+.luarc.json
+.trash
+lazy-lock.json

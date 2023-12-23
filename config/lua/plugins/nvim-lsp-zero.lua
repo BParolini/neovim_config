@@ -10,6 +10,8 @@ return {
         },
         "williamboman/mason-lspconfig.nvim",
 
+        "simrat39/rust-tools.nvim",
+
         "folke/neodev.nvim",
         "mfussenegger/nvim-lint",
 
@@ -31,6 +33,7 @@ return {
                 "dockerls",
                 "docker_compose_language_service",
                 "emmet_ls",
+                "jsonls",
                 "gopls",
                 "lua_ls",
                 "marksman",
@@ -131,6 +134,30 @@ return {
 
         lsp.setup_servers({
             "yamlls", "dockerls", "docker_compose_language_service", "emmet_ls", "marksman",
+        })
+
+        require("rust-tools").setup({
+            server = {
+                capabilities = require("cmp_nvim_lsp").default_capabilities(),
+            },
+            tools = {
+                autoSetHints = true,
+                runnables = {
+                    use_telescope = true,
+                },
+                hover_actions = {
+                    auto_focus = true,
+                },
+                inlay_hints = {
+                    show_parameter_hints = true,
+                    parameter_hints_prefix = "<-",
+                    other_hints_prefix = "=>",
+                    max_len_align = false,
+                    max_len_align_padding = 1,
+                    right_align = false,
+                    right_align_padding = 7,
+                },
+            },
         })
     end,
 }

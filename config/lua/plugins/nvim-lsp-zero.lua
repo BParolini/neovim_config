@@ -28,6 +28,8 @@ return {
         require("mason-lspconfig").setup({
             ensure_installed = {
                 "bashls",
+                "clangd",
+                "cmake",
                 "dockerls",
                 "docker_compose_language_service",
                 "emmet_ls",
@@ -77,6 +79,11 @@ return {
             },
             servers = {
                 ["bashls"] = { "sh", "bash", "zsh" },
+                ["clangd"] = { "c", "cpp", "objc", "objcpp" },
+                ["cmake"] = { "cmake" },
+                ["dockerls"] = { "dockerfile" },
+                ["docker_compose_language_service"] = { "docker-compose" },
+                ["emmet_ls"] = { "html", "css", "scss", "sass", "less" },
                 ["gopls"] = { "go", "gomod", "gowork", "gotmpl" },
                 ["jsonls"] = { "json" },
                 ["jdtls"] = { "java" },
@@ -107,8 +114,8 @@ return {
         })
 
         lsp.setup_servers({
-            "bashls", "dockerls", "docker_compose_language_service", "emmet_ls", "jsonls",
-            "lua_ls", "marksman", "ocamllsp", "rust_analyzer", "yamlls",
+            "bashls", "clangd", "cmake", "dockerls", "docker_compose_language_service",
+            "emmet_ls", "jsonls", "lua_ls", "marksman", "ocamllsp", "rust_analyzer", "yamlls",
         })
 
         lspconfig.gopls.setup {

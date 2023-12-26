@@ -10,8 +10,6 @@ return {
         },
         "williamboman/mason-lspconfig.nvim",
 
-        "simrat39/rust-tools.nvim",
-
         "folke/neodev.nvim",
         "mfussenegger/nvim-lint",
 
@@ -33,10 +31,12 @@ return {
                 "dockerls",
                 "docker_compose_language_service",
                 "emmet_ls",
+                "jdtls",
                 "jsonls",
                 "gopls",
                 "lua_ls",
                 "marksman",
+                "ocamllsp",
                 "pylsp",
                 "rust_analyzer",
                 "yamlls",
@@ -75,10 +75,15 @@ return {
                 timeout_ms = 10000,
             },
             servers = {
-                ["lua_ls"] = { "lua" },
-                ["gopls"] = { "go", "gomod", "gowork", "gotmpl" },
-                ["rust_analyzer"] = { "rust" },
                 ["bashls"] = { "sh", "bash", "zsh" },
+                ["gopls"] = { "go", "gomod", "gowork", "gotmpl" },
+                ["jsonls"] = { "json" },
+                ["jdtls"] = { "java" },
+                ["lua_ls"] = { "lua" },
+                ["ocamllsp"] = { "ocaml" },
+                ["pylsp"] = { "python" },
+                ["rust_analyzer"] = { "rust" },
+                ["yamlls"] = { "yaml" },
             }
         })
 
@@ -99,6 +104,12 @@ return {
                 },
             },
         })
+
+        lsp.setup_servers({
+            "bashls", "dockerls", "docker_compose_language_service", "emmet_ls", "jsonls",
+            "lua_ls", "marksman", "ocamllsp", "rust_analyzer", "yamlls",
+        })
+
         lspconfig.gopls.setup {
             cmd = { "gopls" },
             filetypes = { "go", "gomod", "gowork", "gotmpl" },
@@ -114,7 +125,6 @@ return {
                 }
             },
         }
-        lspconfig.bashls.setup {}
         lspconfig.pylsp.setup {
             settings = {
                 pylsp = {
@@ -126,38 +136,5 @@ return {
                 }
             }
         }
-        lspconfig.rust_analyzer.setup {
-            settings = {
-                ['rust-analyzer'] = {}
-            },
-        }
-
-        lsp.setup_servers({
-            "yamlls", "dockerls", "docker_compose_language_service", "emmet_ls", "marksman",
-        })
-
-        require("rust-tools").setup({
-            server = {
-                capabilities = require("cmp_nvim_lsp").default_capabilities(),
-            },
-            tools = {
-                autoSetHints = true,
-                runnables = {
-                    use_telescope = true,
-                },
-                hover_actions = {
-                    auto_focus = true,
-                },
-                inlay_hints = {
-                    show_parameter_hints = true,
-                    parameter_hints_prefix = "<-",
-                    other_hints_prefix = "=>",
-                    max_len_align = false,
-                    max_len_align_padding = 1,
-                    right_align = false,
-                    right_align_padding = 7,
-                },
-            },
-        })
     end,
 }

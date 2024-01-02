@@ -53,10 +53,10 @@ return {
                     { buffer = bufnr, noremap = true, desc = "Find symbol", silent = true })
                 vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float,
                     { buffer = bufnr, noremap = true, desc = "Show diagnostics window", silent = true })
-                vim.keymap.set("n", "[d", vim.diagnostic.goto_next,
-                    { buffer = bufnr, noremap = true, desc = "Go to next diagnostic", silent = true })
-                vim.keymap.set("n", "]d", vim.diagnostic.goto_prev,
+                vim.keymap.set("n", "[d", vim.diagnostic.goto_prev,
                     { buffer = bufnr, noremap = true, desc = "Go to previous diagnostic", silent = true })
+                vim.keymap.set("n", "]d", vim.diagnostic.goto_next,
+                    { buffer = bufnr, noremap = true, desc = "Go to next diagnostic", silent = true })
                 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action,
                     { buffer = bufnr, noremap = true, desc = "Show code actions", silent = true })
                 vim.keymap.set("n", "<leader>vrr", vim.lsp.buf.references,

@@ -59,6 +59,10 @@ return {
             local crates = require("crates")
             crates.setup(opts)
             crates.show()
+
+            vim.keymap.set("n", "<leader>rcu", function()
+                crates.upgrade_all_crates()
+            end, { noremap = true, silent = true, desc = "Update all crates" })
         end,
     },
 }

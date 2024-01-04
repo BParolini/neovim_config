@@ -7,6 +7,9 @@ return {
     },
     {
         "williamboman/mason-lspconfig.nvim",
+        dependencies = {
+            "williamboman/mason.nvim",
+        },
         config = function()
             require("mason-lspconfig").setup({
                 ensure_installed = {
@@ -26,12 +29,20 @@ return {
                     "rust_analyzer",
                     "yamlls",
                 },
+                automatic_installation = true,
             })
         end,
     },
     {
         "neovim/nvim-lspconfig",
+        dependencies = {
+            "williamboman/mason.nvim",
+            "williamboman/mason-lspconfig.nvim",
+            "folke/neodev.nvim",
+        },
         config = function()
+            require("neodev").setup({})
+
             local lspconfig = require("lspconfig")
             local util = require("lspconfig/util")
 
@@ -49,8 +60,9 @@ return {
                     { buffer = bufnr, noremap = true, desc = "Show references", silent = true })
                 vim.keymap.set("n", "K", vim.lsp.buf.hover,
                     { buffer = bufnr, noremap = true, desc = "Show documentation", silent = true })
-                vim.keymap.set("n", "<leader>ws", function() vim.lsp.buf.workspace_symbol(vim.fn.input("Grep > ")) end,
-                    { buffer = bufnr, noremap = true, desc = "Find symbol", silent = true })
+                vim.keymap.set("n", "<leader>ws", function()
+                    vim.lsp.buf.workspace_symbol(vim.fn.input("Grep > "))
+                end, { buffer = bufnr, noremap = true, desc = "Find symbol", silent = true })
                 vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float,
                     { buffer = bufnr, noremap = true, desc = "Show diagnostics window", silent = true })
                 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev,
@@ -67,19 +79,7 @@ return {
                     { buffer = bufnr, noremap = true, desc = "Show signature help", silent = true })
             end
 
-            lspconfig.lua_ls.setup({
-                on_attach = on_attach,
-                capabilities = capabilities,
-                settings = {
-                    Lua = {
-                        workspace = {
-                            checkThirdParty = false,
-                        },
-                    },
-                },
-            })
-
-            lspconfig.gopls.setup {
+            lspconfig.gopls.setup({
                 on_attach = on_attach,
                 capabilities = capabilities,
                 cmd = { "gopls" },
@@ -93,27 +93,51 @@ return {
                             unusedparams = true,
                         },
                         staticcheck = true,
-                    }
+                    },
                 },
-            }
+            })
 
-            lspconfig.pylsp.setup {
+            lspconfig.pylsp.setup({
                 on_attach = on_attach,
                 capabilities = capabilities,
                 settings = {
                     pylsp = {
                         plugins = {
                             flake8 = {
-                                enabled = true
-                            }
-                        }
-                    }
-                }
-            }
+                                enabled = true,
+                            },
+                        },
+                    },
+                },
+            })
+
+            lspconfig.rust_analyzer.setup({
+                on_attach = on_attach,
+                capabilities = capabilities,
+                filetypes = { "rust" },
+                root_dir = util.root_pattern("Cargo.toml"),
+                settings = {
+                    ["rust-analyzer"] = {
+                        cargo = {
+                            allFeatures = true,
+                        },
+                    },
+                },
+            })
 
             local lsps = {
-                "bashls", "clangd", "cmake", "dockerls", "docker_compose_language_service",
-                "emmet_ls", "jdtls", "jsonls", "marksman", "ocamllsp", "rust_analyzer", "yamlls",
+                "bashls",
+                "clangd",
+                "cmake",
+                "dockerls",
+                "docker_compose_language_service",
+                "emmet_ls",
+                "jdtls",
+                "jsonls",
+                "lua_ls",
+                "marksman",
+                "ocamllsp",
+                "yamlls",
             }
 
             for _, lsp_item in ipairs(lsps) do
@@ -122,6 +146,14 @@ return {
                     capabilities = capabilities,
                 })
             end
+        end,
+    },
+    {
+        "rust-lang/rust.vim",
+        ft = { "rust" },
+        init = function()
+            vim.g.rustfmt_autosave = 1
+            -- vim.g.rustfmt_fail_silently = 1
         end,
     },
 }

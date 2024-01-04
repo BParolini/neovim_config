@@ -22,13 +22,13 @@ return {
 
             cmp.setup({
                 sources = cmp.config.sources({
-                    { name = 'nvim_lsp' },
+                    { name = "nvim_lsp" },
                     { name = "luasnip" },
-                    { name = 'buffer' },
-                    { name = 'path' },
-                    { name = 'nvim_lua' },
+                    { name = "buffer" },
+                    { name = "path" },
+                    { name = "nvim_lua" },
                 }, {
-                    { name = "buffer" }
+                    { name = "buffer" },
                 }),
                 snippet = {
                     expand = function(args)
@@ -40,13 +40,25 @@ return {
                     documentation = cmp.config.window.bordered(),
                 },
                 mapping = cmp.mapping.preset.insert({
-                    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-                    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-                    ['<C-Space>'] = cmp.mapping.complete(),
-                    ['<C-e>'] = cmp.mapping.abort(),
-                    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+                    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+                    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+                    ["<C-Space>"] = cmp.mapping.complete(),
+                    ["<C-e>"] = cmp.mapping.abort(),
+                    ["<CR>"] = cmp.mapping.confirm({ select = true }),
                 }),
             })
+        end,
+    },
+    {
+        "saecki/crates.nvim",
+        dependencies = {
+            "hrsh7th/nvim-cmp",
+        },
+        ft = { "rust", "toml" },
+        config = function(_, opts)
+            local crates = require("crates")
+            crates.setup(opts)
+            crates.show()
         end,
     },
 }

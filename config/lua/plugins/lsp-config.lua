@@ -41,7 +41,15 @@ return {
             "folke/neodev.nvim",
         },
         config = function()
-            require("neodev").setup({})
+            require("neodev").setup({
+                library = {
+                    plugins = {
+                        "nvim-lspconfig",
+                        "nvim-dap-ui",
+                    },
+                    types = true,
+                },
+            })
 
             local lspconfig = require("lspconfig")
             local util = require("lspconfig/util")

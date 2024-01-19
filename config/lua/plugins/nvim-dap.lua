@@ -17,6 +17,7 @@ return {
         local dap, dapui = require("dap"), require("dapui")
 
         dapui.setup()
+        require("nvim-dap-virtual-text").setup()
 
         -- Language specific configurations
         require("dap-go").setup()
@@ -35,14 +36,16 @@ return {
             dapui.close()
         end
 
-        vim.keymap.set("n", "<leader>dt", dap.toggle_breakpoint, { silent = true, desc = "Toggle breakpoint" })
-        vim.keymap.set("n", "<leader>dT", function()
+        local keymap = vim.keymap
+        keymap.set("n", "<leader>dt", dap.toggle_breakpoint, { silent = true, desc = "Toggle breakpoint" })
+        keymap.set("n", "<leader>dT", function()
             dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
         end, { silent = true, desc = "Set conditional breakpoint" })
-        vim.keymap.set("n", "<leader>dc", dap.continue, { silent = true, desc = "Debug continue" })
-        vim.keymap.set("n", "<leader>do", dap.step_over, { silent = true, desc = "Debug step over" })
-        vim.keymap.set("n", "<leader>di", dap.step_into, { silent = true, desc = "Debug step into" })
-        vim.keymap.set("n", "<leader>dI", dap.step_out, { silent = true, desc = "Debug step out" })
+        keymap.set("n", "<leader>dc", dap.continue, { silent = true, desc = "Debug continue" })
+        keymap.set("n", "<leader>do", dap.step_over, { silent = true, desc = "Debug step over" })
+        keymap.set("n", "<leader>di", dap.step_into, { silent = true, desc = "Debug step into" })
+        keymap.set("n", "<leader>dI", dap.step_out, { silent = true, desc = "Debug step out" })
+        keymap.set("n", "<leader>ds", dap.terminate, { silent = true, desc = "Debug stop" })
 
         -- telescope-dap
         require("telescope").load_extension("dap")

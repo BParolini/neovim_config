@@ -1,4 +1,5 @@
 local opt = vim.opt
+local api = vim.api
 
 -- Appearance
 opt.nu = true
@@ -17,6 +18,25 @@ opt.shiftwidth = 4
 opt.expandtab = true
 opt.smartindent = true
 opt.wrap = false
+
+-- region Filetype specific configuration
+api.nvim_create_autocmd("FileType", {
+    pattern = { "go", "make" },
+    callback = function()
+        opt.expandtab = false
+        opt.tabstop = 4
+        opt.shiftwidth = 4
+        opt.softtabstop = 4
+    end,
+})
+
+api.nvim_create_autocmd("FileType", {
+    pattern = "jproperties",
+    callback = function()
+        opt.fileencoding = "ISO-8859-1"
+    end,
+})
+-- endregion
 
 -- Behavior
 opt.hidden = true

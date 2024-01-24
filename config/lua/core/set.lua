@@ -1,5 +1,4 @@
-local opt = vim.opt
-local api = vim.api
+local opt, api = vim.opt, vim.api
 
 -- Appearance
 opt.nu = true

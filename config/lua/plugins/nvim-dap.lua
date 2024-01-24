@@ -15,13 +15,14 @@ return {
     },
     config = function()
         local dap, dapui = require("dap"), require("dapui")
+        local keymap, fn = vim.keymap, vim.fn
 
         dapui.setup()
         require("nvim-dap-virtual-text").setup()
 
         -- Language specific configurations
         require("dap-go").setup()
-        require("dap-python").setup(vim.fn.getcwd() .. "/.venv/bin/python")
+        require("dap-python").setup(fn.getcwd() .. "/.venv/bin/python")
 
         dap.listeners.before.attach.dapui_config = function()
             dapui.open()
@@ -36,10 +37,9 @@ return {
             dapui.close()
         end
 
-        local keymap = vim.keymap
         keymap.set("n", "<leader>dt", dap.toggle_breakpoint, { silent = true, desc = "Toggle breakpoint" })
         keymap.set("n", "<leader>dT", function()
-            dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
+            dap.set_breakpoint(fn.input("Breakpoint condition: "))
         end, { silent = true, desc = "Set conditional breakpoint" })
         keymap.set("n", "<leader>dc", dap.continue, { silent = true, desc = "Debug continue" })
         keymap.set("n", "<leader>do", dap.step_over, { silent = true, desc = "Debug step over" })

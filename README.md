@@ -22,6 +22,7 @@ All plugins are managed with [Lazy](https://github.com/folke/lazy.nvim).
   - [crates.nvim](https://github.com/Saecki/crates.nvim)
 - [Dev Icons](https://github.com/ryanoasis/vim-devicons)
 - [GH Copilot](https://github.com/github/copilot.vim)
+- [Git Signs](https://github.com/lewis6991/gitsigns.nvim)
 - [Harpoon](https://github.com/ThePrimeagen/harpoon)
 - LSP Config
   - [mason](https://github.com/williamboman/mason.nvim)

@@ -4,10 +4,24 @@ return {
         branch = "0.1.x",
         dependencies = {
             "nvim-lua/plenary.nvim",
+            {
+                "nvim-telescope/telescope-ui-select.nvim",
+                config = function()
+                    local telescope = require("telescope")
+                    telescope.setup({
+                        extensions = {
+                            ["ui-select"] = {
+                                require("telescope.themes").get_dropdown({}),
+                            },
+                        },
+                    })
+                end,
+            },
         },
         config = function()
             local telescope = require("telescope")
             telescope.load_extension("harpoon")
+            telescope.load_extension("ui-select")
 
             local builtin = require("telescope.builtin")
             local keymap, fn = vim.keymap, vim.fn
@@ -25,20 +39,11 @@ return {
                 builtin.grep_string({ search = word })
             end, { desc = "Telescope grep word under cursor (blank space delimited)", silent = true })
             keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Telescope help tags", silent = true })
-        end,
-    },
-    {
-        "nvim-telescope/telescope-ui-select.nvim",
-        config = function()
-            local telescope = require("telescope")
-            telescope.setup({
-                extensions = {
-                    ["ui-select"] = {
-                        require("telescope.themes").get_dropdown({}),
-                    },
-                },
-            })
-            telescope.load_extension("ui-select")
+            keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "Telescope keymaps", silent = true })
+            keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "Telescope diagnostics", silent = true })
+            keymap.set("n", "<leader>fr", builtin.resume, { desc = "Telescope resume", silent = true })
+            keymap.set("n", "<leader>f.", builtin.oldfiles, { desc = "Telescope old files", silent = true })
+            keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers", silent = true })
         end,
     },
 }

@@ -33,3 +33,7 @@ keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 keymap.set("n", "<leader><leader>", function()
     cmd("so")
 end, { desc = "Sources the current file" })
+
+keymap.set("n", "<leader>y", '"*y', { silent = true, desc = "Yank to system clipboard" })
+keymap.set("n", "<leader>p", '"*p', { silent = true, desc = "Paste from system clipboard" })
+keymap.set("n", "<leader>P", '"*P', { silent = true, desc = "Paste from system clipboard before cursor" })

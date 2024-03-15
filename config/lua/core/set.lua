@@ -18,7 +18,7 @@ opt.expandtab = true
 opt.smartindent = true
 opt.wrap = false
 
-require("core.file_autocmd")
+require("autocmd.filetypes")
 
 -- Behavior
 opt.hidden = true

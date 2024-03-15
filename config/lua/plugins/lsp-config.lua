@@ -25,6 +25,7 @@ return {
                     "emmet_ls",
                     "gopls",
                     "hls",
+                    "htmx",
                     "jdtls",
                     "jsonls",
                     "kotlin_language_server",
@@ -97,6 +98,8 @@ return {
 
             local lspconfig = require("lspconfig")
             local util = require("lspconfig/util")
+
+            require("lspconfig.ui.windows").default_options.border = "double"
 
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
@@ -183,6 +186,7 @@ return {
                 "dockerls",
                 "emmet_ls",
                 "hls",
+                "htmx",
                 "jdtls",
                 "jsonls",
                 "kotlin_language_server",

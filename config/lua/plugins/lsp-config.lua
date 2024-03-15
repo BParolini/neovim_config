@@ -34,6 +34,7 @@ return {
                     "ocamllsp",
                     "pylsp",
                     "rust_analyzer",
+                    "templ",
                     "yamlls",
                 },
                 automatic_installation = true,
@@ -193,6 +194,7 @@ return {
                 "lua_ls",
                 "marksman",
                 "ocamllsp",
+                "templ",
                 "yamlls",
             }
 

@@ -102,7 +102,7 @@ return {
             capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
             local on_attach = function(client, bufnr)
-                local keymap, lsp, fn, diagnostic, api = vim.keymap, vim.lsp, vim.fn, vim.diagnostic, vim.api
+                local keymap, lsp, fn, diagnostic = vim.keymap, vim.lsp, vim.fn, vim.diagnostic
 
                 keymap.set("n", "gd", lsp.buf.definition, { buffer = bufnr, noremap = true, desc = "Go to definition", silent = true })
                 keymap.set("n", "gi", lsp.buf.implementation, { buffer = bufnr, noremap = true, desc = "Go to implementation", silent = true })
@@ -121,20 +121,7 @@ return {
                 keymap.set("n", "<leader>rn", lsp.buf.rename, { buffer = bufnr, noremap = true, desc = "Rename element", silent = true })
                 keymap.set("i", "<leader>he", lsp.buf.signature_help, { buffer = bufnr, noremap = true, desc = "Show signature help", silent = true })
 
-                local augroup = api.nvim_create_augroup("LspFormatting", {})
-                if client.supports_method("textDocument/formatting") then
-                    api.nvim_clear_autocmds({
-                        group = augroup,
-                        buffer = bufnr,
-                    })
-                    api.nvim_create_autocmd("BufWritePre", {
-                        group = augroup,
-                        buffer = bufnr,
-                        callback = function()
-                            lsp.buf.format({ bufnr = bufnr })
-                        end,
-                    })
-                end
+                require("autocmd.formatting").create_formatting_augroup(client, bufnr)
             end
 
             lspconfig.gopls.setup({

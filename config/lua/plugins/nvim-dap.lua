@@ -5,6 +5,8 @@ return {
         "rcarriga/nvim-dap-ui",
         "theHamsta/nvim-dap-virtual-text",
 
+        "nvim-neotest/nvim-nio",
+
         -- Language specific configurations
         "leoluz/nvim-dap-go",
         "mfussenegger/nvim-dap-python",

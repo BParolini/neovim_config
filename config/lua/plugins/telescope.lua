@@ -45,17 +45,6 @@ return {
             keymap.set("n", "<leader>fr", builtin.resume, { desc = "Telescope resume", silent = true })
             keymap.set("n", "<leader>f.", builtin.oldfiles, { desc = "Telescope old files", silent = true })
             keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers", silent = true })
-            keymap.set("n", "<leader>fs", builtin.lsp_document_symbols,
-                { desc = "Telescope lsp document symbols", silent = true })
-            keymap.set("n", "<leader>fS", builtin.lsp_workspace_symbols,
-                { desc = "Telescope lsp workspace symbols", silent = true })
-            keymap.set("n", "<leader>fc", builtin.lsp_code_actions,
-                { desc = "Telescope lsp code actions", silent = true })
-            keymap.set("n", "<leader>fl", builtin.lsp_references, { desc = "Telescope lsp references", silent = true })
-            keymap.set("n", "<leader>ft", builtin.lsp_workspace_diagnostics,
-                { desc = "Telescope lsp workspace diagnostics", silent = true })
-            keymap.set("n", "<leader>fm", builtin.lsp_implementations,
-                { desc = "Telescope lsp implementations", silent = true })
             keymap.set("n", "<leader>fn", "<cmd>Telescope noice<cr>", { desc = "Telescope noice", silent = true })
         end,
     },

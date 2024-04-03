@@ -22,3 +22,4 @@ local lazy_opts = {
 require("lazy").setup("plugins", lazy_opts)
 require("core.remap")
 require("core.set")
+require("core.ft")

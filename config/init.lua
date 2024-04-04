@@ -18,6 +18,13 @@ local lazy_opts = {
     ui = {
         border = "double",
     },
+    change_detection = {
+        notify = false,
+    },
+    checker = {
+        enabled = true,
+        notify = false,
+    },
 }
 require("lazy").setup("plugins", lazy_opts)
 require("core.remap")

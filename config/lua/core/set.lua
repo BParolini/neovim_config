@@ -1,6 +1,7 @@
 local opt = vim.opt
 
 -- Appearance
+opt.background = "dark"
 opt.nu = true
 opt.relativenumber = true
 opt.termguicolors = true

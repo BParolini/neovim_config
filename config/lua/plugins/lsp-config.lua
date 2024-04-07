@@ -56,12 +56,15 @@ return {
                 "cmakelang",
                 "cmakelint",
                 "codelldb",
+                "debugpy",
                 "delve",
                 "flake8",
                 "go-debug-adapter",
                 "goimports",
                 "golines",
                 "google-java-format",
+                "html",
+                "htmx",
                 "isort",
                 "jq",
                 "kotlin-debug-adapter",
@@ -162,6 +165,7 @@ return {
             lspconfig.pylsp.setup({
                 on_attach = on_attach,
                 capabilities = capabilities,
+                filetypes = { "python" },
                 settings = {
                     pylsp = {
                         configurationSources = { "flake8" },
@@ -185,8 +189,20 @@ return {
                 root_dir = util.root_pattern("Cargo.toml"),
                 settings = {
                     ["rust-analyzer"] = {
+                        imports = {
+                            granularity = {
+                                group = "module",
+                            },
+                            prefix = "self",
+                        },
                         cargo = {
                             allFeatures = true,
+                            buildScripts = {
+                                enable = true,
+                            },
+                        },
+                        procMacro = {
+                            enable = true,
                         },
                     },
                 },
@@ -228,16 +244,50 @@ return {
         end,
     },
     {
+        "olexsmir/gopher.nvim",
+        ft = "go",
+        dependencies = {
+            "neovim/nvim-lspconfig",
+        },
+        config = function(_, opts)
+            require("gopher").setup(opts)
+
+            local keymap, fn, cmd = vim.keymap, vim.fn, vim.cmd
+            keymap.set("n", "<leader>gmt", "<cmd>GoMod tidy<CR>", { desc = "Runs go mod tidy" })
+            keymap.set("n", "<leader>gmi", "<cmd>GoMod init<CR>", { desc = "Runs go mod init" })
+
+            keymap.set("n", "<leader>gtaj", "<cmd>GoTagAdd json<CR>", { desc = "Add json tag to struct" })
+            keymap.set("n", "<leader>gtay", "<cmd>GoTagAdd yaml<CR>", { desc = "Add yaml tag to struct" })
+            keymap.set("n", "<leader>gtrj", "<cmd>GoTagRm json<CR>", { desc = "Removes json tag to struct" })
+            keymap.set("n", "<leader>gtry", "<cmd>GoTagRm yaml<CR>", { desc = "Removes yaml tag to struct" })
+
+            keymap.set("n", "<leader>gmd", function()
+                cmd(string.format("GoGet %s", fn.input("Go mod to download (go get): ")))
+            end, { desc = "Runs go get package" })
+
+            keymap.set("n", "<leader>gii", function()
+                cmd(string.format("GoImpl %s", fn.input("package.Interface to implement: ")))
+            end, { desc = "Implement interface for current struct" })
+
+            keymap.set("n", "<leader>gie", "<cmd>GoIfErr<CR>", { desc = "Adds if err != nil" })
+        end,
+        build = function()
+            vim.cmd([[silent! GoInstallDeps]])
+        end,
+    },
+    {
         "rust-lang/rust.vim",
-        ft = { "rust" },
+        ft = "rust",
         init = function()
             vim.g.rustfmt_autosave = 1
-            -- vim.g.rustfmt_fail_silently = 1
         end,
     },
     {
         "mrcjkb/haskell-tools.nvim",
         version = "^3", -- Recommended
         ft = { "haskell", "lhaskell", "cabal", "cabalproject" },
+        dependencies = {
+            "neovim/nvim-lspconfig",
+        },
     },
 }

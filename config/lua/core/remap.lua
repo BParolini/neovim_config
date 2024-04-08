@@ -1,6 +1,7 @@
 local keymap, lsp, cmd = vim.keymap, vim.lsp, vim.cmd
 
 -- disabling arrow keys within all modes to enforce vim motion learning
+---@type table
 local options = { noremap = true }
 
 keymap.set("", "<Up>", "<nop>", options)

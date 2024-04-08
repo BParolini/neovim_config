@@ -17,6 +17,7 @@ return {
             "mfussenegger/nvim-dap",
             "rcarriga/nvim-dap-ui",
         },
+        ---@param opts table
         config = function(_, opts)
             local keymap = vim.keymap
             local path = "~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"

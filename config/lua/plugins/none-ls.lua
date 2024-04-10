@@ -16,6 +16,7 @@ return {
                 null_ls.builtins.formatting.goimports,
                 null_ls.builtins.formatting.golines,
                 null_ls.builtins.formatting.markdownlint,
+                null_ls.builtins.formatting.prettier,
 
                 null_ls.builtins.diagnostics.yamllint,
                 null_ls.builtins.diagnostics.cmake_lint,

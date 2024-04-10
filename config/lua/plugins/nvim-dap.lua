@@ -19,12 +19,12 @@ return {
         },
         ---@param opts table
         config = function(_, opts)
-            local keymap = vim.keymap
+            --local keymap = vim.keymap
             local path = "~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
             local dap_python = require("dap-python")
             dap_python.setup(path, opts)
 
-            keymap.set("n", "<leader>dpr", dap_python.test_method(), { desc = "Debug Python Run" })
+            --keymap.set("n", "<leader>dpr", dap_python.test_method(), { desc = "Debug Python Run" })
         end,
     },
     {

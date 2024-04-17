@@ -101,6 +101,7 @@ return {
                     plugins = {
                         "nvim-lspconfig",
                         "nvim-dap-ui",
+                        "neotest",
                     },
                     types = true,
                 },

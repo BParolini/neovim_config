@@ -21,6 +21,7 @@ return {
                     "bufls",
                     "clangd",
                     "cmake",
+                    "cssls",
                     "docker_compose_language_service",
                     "dockerls",
                     "emmet_ls",
@@ -239,12 +240,11 @@ return {
                 },
             })
 
-            local html_lsps = { "html", "htmx" }
-            for _, lsp in ipairs(html_lsps) do
+            for _, lsp in ipairs({ "html", "htmx" }) do
                 lspconfig[lsp].setup({
                     on_attach = on_attach,
                     capabilities = capabilities,
-                    filetypes = { lsp, "templ" },
+                    filetypes = { "html", "templ" },
                 })
             end
 
@@ -253,6 +253,7 @@ return {
                 "bufls",
                 "clangd",
                 "cmake",
+                "cssls",
                 "docker_compose_language_service",
                 "dockerls",
                 "emmet_ls",

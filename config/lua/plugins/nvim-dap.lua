@@ -17,14 +17,9 @@ return {
             "mfussenegger/nvim-dap",
             "rcarriga/nvim-dap-ui",
         },
-        ---@param opts table
-        config = function(_, opts)
-            --local keymap = vim.keymap
+        config = function()
             local path = "~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
-            local dap_python = require("dap-python")
-            dap_python.setup(path, opts)
-
-            --keymap.set("n", "<leader>dpr", dap_python.test_method(), { desc = "Debug Python Run" })
+            require("dap-python").setup(path)
         end,
     },
     {

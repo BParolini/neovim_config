@@ -5,6 +5,7 @@ return {
 
         null_ls.setup({
             sources = {
+                null_ls.builtins.formatting.buf,
                 null_ls.builtins.formatting.stylua,
                 null_ls.builtins.formatting.google_java_format,
                 null_ls.builtins.formatting.isort,
@@ -18,6 +19,7 @@ return {
                 null_ls.builtins.formatting.markdownlint,
                 null_ls.builtins.formatting.prettier,
 
+                null_ls.builtins.diagnostics.buf,
                 null_ls.builtins.diagnostics.yamllint,
                 null_ls.builtins.diagnostics.cmake_lint,
                 null_ls.builtins.diagnostics.markdownlint,

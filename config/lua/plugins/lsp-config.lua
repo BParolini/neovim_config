@@ -92,6 +92,7 @@ return {
             "williamboman/mason-lspconfig.nvim",
             "folke/neodev.nvim",
             { "j-hui/fidget.nvim", opts = {} },
+            "b0o/schemastore.nvim",
         },
         config = function()
             require("neodev").setup({
@@ -210,6 +211,34 @@ return {
                 },
             })
 
+            local schemastore = require("schemastore")
+            lspconfig.jsonls.setup({
+                on_attach = on_attach,
+                capabilities = capabilities,
+                settings = {
+                    json = {
+                        schemas = schemastore.json.schemas(),
+                        validate = {
+                            enable = true,
+                        },
+                    },
+                },
+            })
+
+            lspconfig.yamlls.setup({
+                on_attach = on_attach,
+                capabilities = capabilities,
+                settings = {
+                    yaml = {
+                        schemastore = {
+                            enable = false,
+                            url = "",
+                        },
+                        schemas = schemastore.yaml.schemas(),
+                    },
+                },
+            })
+
             local html_lsps = { "html", "htmx" }
             for _, lsp in ipairs(html_lsps) do
                 lspconfig[lsp].setup({
@@ -229,7 +258,6 @@ return {
                 "emmet_ls",
                 "hls",
                 "jdtls",
-                "jsonls",
                 "kotlin_language_server",
                 "lua_ls",
                 "marksman",
@@ -237,7 +265,6 @@ return {
                 "pyright",
                 "templ",
                 "tsserver",
-                "yamlls",
             }
 
             for _, lsp_item in ipairs(lsps) do

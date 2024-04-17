@@ -21,10 +21,15 @@ keymap.set("n", "N", "Nzzzv")
 keymap.set("n", "Q", "<nop>")
 keymap.set("n", "<leader>gg", lsp.buf.format, { desc = "Format current buffer" })
 
-keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
-keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
-keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
-keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
+-- Quickfix keymaps
+keymap.set("n", "<leader>qo", "<cmd>copen<CR>", { desc = "Opens the quickfix window" })
+keymap.set("n", "<leader>qx", "<cmd>cclose<CR>", { desc = "Closeds the quickfix window" })
+keymap.set("n", "<leader>qj", "<cmd>cnext<CR>zz", { desc = "Moves to the next element in quickfix window" })
+keymap.set("n", "<leader>qk", "<cmd>cprev<CR>zz", { desc = "Moves to the previous element in quickfix window" })
+
+-- Location list keymaps
+keymap.set("n", "<leader>lj", "<cmd>lnext<CR>zz", { desc = "Moves to the next element in location list " })
+keymap.set("n", "<leader>lk", "<cmd>lprev<CR>zz", { desc = "Moves to the previous element in location list " })
 
 keymap.set("n", "<leader>ss", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Make current file executable" })

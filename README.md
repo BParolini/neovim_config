@@ -61,6 +61,7 @@ All plugins are managed with [Lazy](https://github.com/folke/lazy.nvim).
   - [nvim-dap-python](https://github.com/mfussenegger/nvim-dap-python)
   - [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
   - [telescope-dap.nvim](https://github.com/nvim-telescope/telescope-dap.nvim)
+- [Obsidian](https://github.com/epwalsh/obsidian.nvim)
 - [Surround](https://github.com/kylechui/nvim-surround)
 - [Telescope](https://github.com/nvim-telescope/telescope.nvim)
   - [plenary.nvim](https://github.com/nvim-lua/plenary.nvim)

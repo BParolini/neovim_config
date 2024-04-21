@@ -119,7 +119,7 @@ return {
             --- @param client lsp.Client
             --- @param bufnr number
             local on_attach = function(client, bufnr)
-                local keymap, lsp, fn, diagnostic = vim.keymap, vim.lsp, vim.fn, vim.diagnostic
+                local keymap, lsp, fn, diagnostic, api = vim.keymap, vim.lsp, vim.fn, vim.diagnostic, vim.api
 
                 keymap.set("n", "gd", lsp.buf.definition,
                     { buffer = bufnr, noremap = true, desc = "Go to definition", silent = true })
@@ -129,6 +129,11 @@ return {
                     { buffer = bufnr, noremap = true, desc = "Go to declaration", silent = true })
                 keymap.set("n", "gt", lsp.buf.type_definition,
                     { buffer = bufnr, noremap = true, desc = "Go to type declaration", silent = true })
+                keymap.set("n", "gg", function()
+                    if client.supports_method("textDocument/formatting") then
+                        lsp.buf.format({ bufnr = bufnr })
+                    end
+                end, { desc = "Format current buffer" })
                 keymap.set("n", "gr", require("telescope.builtin").lsp_references,
                     { buffer = bufnr, noremap = true, desc = "Show references", silent = true })
                 keymap.set("n", "K", lsp.buf.hover,
@@ -241,6 +246,12 @@ return {
                 },
             })
 
+            lspconfig.clangd.setup({
+                on_attach = on_attach,
+                capabilities = capabilities,
+                filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
+            })
+
             for _, lsp in ipairs({ "html", "htmx" }) do
                 lspconfig[lsp].setup({
                     on_attach = on_attach,
@@ -252,7 +263,6 @@ return {
             local lsps = {
                 "bashls",
                 "bufls",
-                "clangd",
                 "cmake",
                 "cssls",
                 "docker_compose_language_service",

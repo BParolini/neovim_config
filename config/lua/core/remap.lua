@@ -19,7 +19,6 @@ keymap.set("n", "n", "nzzzv")
 keymap.set("n", "N", "Nzzzv")
 
 keymap.set("n", "Q", "<nop>")
-keymap.set("n", "<leader>gg", lsp.buf.format, { desc = "Format current buffer" })
 
 -- Quickfix keymaps
 keymap.set("n", "<leader>qo", "<cmd>copen<CR>", { desc = "Opens the quickfix window" })

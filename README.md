@@ -57,6 +57,7 @@ All plugins are managed with [Lazy](https://github.com/folke/lazy.nvim).
 - [nvim-dap](https://github.com/mfussenegger/nvim-dap)
   - [nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui)
   - [nvim-dap-virtual-text](https://github.com/theHamsta/nvim-dap-virtual-text)
+  - [mason-nvim-dap](https://github.com/jay-baby/mason-nvim-dap.nvim)
   - [nvim-dap-go](https://github.com/leoluz/nvim-dap-go)
   - [nvim-dap-python](https://github.com/mfussenegger/nvim-dap-python)
   - [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)

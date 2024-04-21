@@ -26,7 +26,7 @@ local lazy_opts = {
         notify = false,
     },
 }
-require("lazy").setup("plugins", lazy_opts)
 require("core.remap")
 require("core.set")
+require("lazy").setup("plugins", lazy_opts)
 require("core.ft")

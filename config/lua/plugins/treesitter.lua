@@ -12,6 +12,7 @@ return {
                     "c",
                     "cmake",
                     "cpp",
+                    "css",
                     "diff",
                     "dockerfile",
                     "gitignore",

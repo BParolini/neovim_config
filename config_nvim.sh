@@ -3,7 +3,4 @@
 # author: Bruno Parolini brunoparolini@gmail.com
 # description: Installs Neovim configuration dependencies
 
-BASEDIR="$(dirname "$(realpath "$0")")"
-
-rm -rf "$HOME/.config/nvim"
-ln -sfF "$BASEDIR/config" "$HOME/.config/nvim"
+stow -d "$(dirname "$(realpath "$0")")" -t "$HOME" --dotfiles .

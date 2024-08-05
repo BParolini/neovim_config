@@ -9,12 +9,12 @@ return {
             flavour = "mocha",
             background = {
                 light = "latte",
-                dark = "mocha"
+                dark = "mocha",
             },
             transparent_background = true,
-            term_colors = true
+            term_colors = true,
         })
 
-        vim.cmd.colorscheme "catppuccin-mocha"
+        vim.cmd.colorscheme("catppuccin-mocha")
     end,
 }

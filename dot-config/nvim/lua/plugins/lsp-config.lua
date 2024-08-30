@@ -190,31 +190,31 @@ return {
                 },
             })
 
-            lspconfig.rust_analyzer.setup({
-                on_attach = on_attach,
-                capabilities = capabilities,
-                filetypes = { "rust" },
-                root_dir = util.root_pattern("Cargo.toml"),
-                settings = {
-                    ["rust-analyzer"] = {
-                        imports = {
-                            granularity = {
-                                group = "module",
-                            },
-                            prefix = "self",
-                        },
-                        cargo = {
-                            allFeatures = true,
-                            buildScripts = {
-                                enable = true,
-                            },
-                        },
-                        procMacro = {
-                            enable = true,
-                        },
-                    },
-                },
-            })
+            -- lspconfig.rust_analyzer.setup({
+            --     on_attach = on_attach,
+            --     capabilities = capabilities,
+            --     filetypes = { "rust" },
+            --     root_dir = util.root_pattern("Cargo.toml"),
+            --     settings = {
+            --         ["rust-analyzer"] = {
+            --             imports = {
+            --                 granularity = {
+            --                     group = "module",
+            --                 },
+            --                 prefix = "self",
+            --             },
+            --             cargo = {
+            --                 allFeatures = true,
+            --                 buildScripts = {
+            --                     enable = true,
+            --                 },
+            --             },
+            --             procMacro = {
+            --                 enable = true,
+            --             },
+            --         },
+            --     },
+            -- })
 
             local schemastore = require("schemastore")
             lspconfig.jsonls.setup({
@@ -323,6 +323,52 @@ return {
         ft = "rust",
         init = function()
             vim.g.rustfmt_autosave = 1
+        end,
+    },
+    {
+        "saecki/crates.nvim",
+        ft = { "toml" },
+        config = function()
+            require("crates").setup({
+                completion = {
+                    cmp = {
+                        enabled = true,
+                    },
+                },
+            })
+            require("cmp").setup.buffer({
+                sources = {
+                    {
+                        name = "creates",
+                    },
+                },
+            })
+        end,
+    },
+    {
+        "mrcjkb/rustaceanvim",
+        version = "^5",
+        lazy = false,
+        dependencies = {
+            "nvim-neotest/neotest",
+        },
+        config = function()
+            local mason_registry = require("mason-registry")
+            local codelldb = mason_registry.get_package("codelldb")
+            local extension_path = codelldb:get_install_path() .. "/extension/"
+            local codelldb_path = extension_path .. "adapter/codelldb"
+            local liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
+            local cfg = require("rustaceanvim.config")
+
+            vim.g.rustaceanvim = {
+                dap = {
+                    adapter = cfg.get_codelldb_adapter(codelldb_path, liblldb_path),
+                },
+            }
+
+            vim.keymap.set("n", "<leader>dq", function()
+                vim.cmd("RustLsp testables")
+            end, { silent = true, desc = "Debugger testtables" })
         end,
     },
     {

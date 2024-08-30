@@ -5,45 +5,26 @@ return {
         dependencies = {
             "nvim-neotest/nvim-nio",
             "nvim-lua/plenary.nvim",
+            "nvim-neotest/neotest-plenary",
             "antoinemadec/FixCursorHold.nvim",
             "nvim-treesitter/nvim-treesitter",
+            "nvim-neotest/neotest-go",
+            "rcasia/neotest-java",
+            "nvim-neotest/neotest-python",
         },
-    },
-    {
-        "nvim-neotest/neotest-go",
-        ft = "go",
         config = function()
             require("neotest").setup({
-                require("neotest-go"),
-            })
-        end,
-    },
-    {
-        "rcasia/neotest-java",
-        ft = "java",
-        config = function()
-            require("neotest").setup({
-                require("neotest-java")({
-                    ignore_wrapper = false,
-                }),
-            })
-        end,
-    },
-    {
-        "nvim-neotest/neotest-python",
-        ft = "python",
-        config = function()
-            require("neotest").setup({
-                require("neotest-python"),
-            })
-        end,
-    },
-    {
-        "rouge8/neotest-rust",
-        ft = "rust",
-        config = function()
-            require("neotest").setup({
-                require("neotest-rust"),
+                adapters = {
+                    require("neotest-plenary"),
+                    require("rustaceanvim.neotest"),
+                    require("neotest-go"),
+                    require("neotest-java")({
+                        ignore_wrapper = false,
+                    }),
+                    require("neotest").setup({
+                        require("neotest-python"),
+                    }),
+                },
             })
         end,
     },

@@ -1,3 +1,7 @@
+-- Multiple themes are configured here, but only one is returned at the end of the file.
+-- By configuring things this way, I can have multiple configurations, but Lazy will download
+-- only the used one.
+
 local catppuccin = {
     "catppuccin/nvim",
     lazy = false,
@@ -16,6 +20,20 @@ local catppuccin = {
         })
 
         vim.cmd.colorscheme("catppuccin-mocha")
+    end,
+}
+
+local nord = {
+    "shaunsingh/nord.nvim",
+    lazy = false,
+    name = "nord",
+    priority = 1000,
+    config = function()
+        vim.g.nord_contrast = true
+        vim.g.nord_borders = true
+        vim.g.nord_bold = false
+
+        vim.cmd.colorscheme("nord")
     end,
 }
 
@@ -46,4 +64,4 @@ local eldritch = {
     end,
 }
 
-return catppuccin
+return nord

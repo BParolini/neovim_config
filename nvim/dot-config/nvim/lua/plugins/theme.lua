@@ -29,6 +29,7 @@ local nord = {
     name = "nord",
     priority = 1000,
     config = function()
+        vim.o.termguicolors = true
         vim.g.nord_contrast = true
         vim.g.nord_borders = true
         vim.g.nord_bold = false
@@ -60,6 +61,7 @@ local eldritch = {
     lazy = false,
     priority = 1000,
     config = function()
+        vim.o.termguicolors = true
         vim.cmd.colorscheme("eldritch")
     end,
 }

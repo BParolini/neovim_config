@@ -2,7 +2,7 @@
 local M = {}
 
 --- Create an autocommand group for formatting
---- @param client lsp.Client
+--- @param client vim.lsp.Client
 --- @param bufnr number
 function M.create_formatting_augroup(client, bufnr)
     local api, lsp = vim.api, vim.lsp

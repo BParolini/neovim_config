@@ -43,6 +43,7 @@ return {
                     "toml",
                     "typescript",
                     "vim",
+                    "vimdoc",
                     "yaml",
                 },
                 -- Install parsers synchronously (only applied to `ensure_installed`)

@@ -66,6 +66,15 @@ local themes = {
             vim.cmd.colorscheme("eldritch")
         end,
     },
+    tokyonight = {
+        "folke/tokyonight.nvim",
+        lazy = false,
+        priority = 1000,
+        config = function()
+            vim.o.termguicolors = true
+            vim.cmd.colorscheme("tokyonight-moon")
+        end,
+    },
 }
 
-return themes.nord
+return themes.tokyonight

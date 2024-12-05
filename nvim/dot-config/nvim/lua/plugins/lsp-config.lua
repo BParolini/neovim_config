@@ -261,7 +261,7 @@ return {
             end
 
             local lsps = {
-                "bufls",
+                "buf_ls",
                 "cmake",
                 "cssls",
                 "docker_compose_language_service",

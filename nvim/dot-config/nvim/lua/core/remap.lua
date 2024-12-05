@@ -1,4 +1,4 @@
-local keymap, lsp, cmd = vim.keymap, vim.lsp, vim.cmd
+local keymap = vim.keymap
 
 -- disabling arrow keys within all modes to enforce vim motion learning
 ---@type table

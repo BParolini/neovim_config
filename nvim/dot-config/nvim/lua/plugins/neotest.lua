@@ -21,9 +21,7 @@ return {
                     require("neotest-java")({
                         ignore_wrapper = false,
                     }),
-                    require("neotest").setup({
-                        require("neotest-python"),
-                    }),
+                    require("neotest-python"),
                 },
             })
         end,

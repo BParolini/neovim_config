@@ -191,32 +191,6 @@ return {
                 },
             })
 
-            -- lspconfig.rust_analyzer.setup({
-            --     on_attach = on_attach,
-            --     capabilities = capabilities,
-            --     filetypes = { "rust" },
-            --     root_dir = util.root_pattern("Cargo.toml"),
-            --     settings = {
-            --         ["rust-analyzer"] = {
-            --             imports = {
-            --                 granularity = {
-            --                     group = "module",
-            --                 },
-            --                 prefix = "self",
-            --             },
-            --             cargo = {
-            --                 allFeatures = true,
-            --                 buildScripts = {
-            --                     enable = true,
-            --                 },
-            --             },
-            --             procMacro = {
-            --                 enable = true,
-            --             },
-            --         },
-            --     },
-            -- })
-
             local schemastore = require("schemastore")
             lspconfig.jsonls.setup({
                 on_attach = on_attach,
@@ -251,6 +225,12 @@ return {
                 filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
             })
 
+            lspconfig.bashls.setup({
+                on_attach = on_attach,
+                capabilities = capabilities,
+                filetypes = { "bash", "zsh", "sh" },
+            })
+
             for _, lsp in ipairs({ "html", "htmx" }) do
                 lspconfig[lsp].setup({
                     on_attach = on_attach,
@@ -260,7 +240,6 @@ return {
             end
 
             local lsps = {
-                "bashls",
                 "bufls",
                 "cmake",
                 "cssls",

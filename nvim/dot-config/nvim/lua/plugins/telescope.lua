@@ -37,6 +37,9 @@ return {
                     find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
                 },
             },
+            extensions = {
+                fzf = {},
+            },
         })
         telescope.load_extension("harpoon")
         telescope.load_extension("ui-select")
@@ -44,7 +47,7 @@ return {
         telescope.load_extension("fzf")
 
         local builtin = require("telescope.builtin")
-        local keymap, fn = vim.keymap, vim.fn
+        local keymap, fn, fs = vim.keymap, vim.fn, vim.fs
         keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files", silent = true })
         keymap.set("n", "<leader>fg", builtin.git_files, { desc = "Telescope find git files", silent = true })
         keymap.set("n", "<leader>fj", function()
@@ -65,5 +68,16 @@ return {
         keymap.set("n", "<leader>f.", builtin.oldfiles, { desc = "Telescope old files", silent = true })
         keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers", silent = true })
         keymap.set("n", "<leader>fn", "<cmd>Telescope noice<cr>", { desc = "Telescope noice", silent = true })
+
+        keymap.set("n", "<leader>en", function()
+            builtin.find_files({
+                cwd = fn.stdpath("config"),
+            })
+        end, { desc = "", silent = true })
+        keymap.set("n", "<leader>ep", function()
+            builtin.find_files({
+                cwd = fs.joinpath(fn.stdpath("data"), "lazy"),
+            })
+        end, { desc = "", silent = true })
     end,
 }

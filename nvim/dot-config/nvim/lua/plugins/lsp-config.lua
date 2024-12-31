@@ -18,7 +18,7 @@ return {
             require("mason-lspconfig").setup({
                 ensure_installed = {
                     "bashls",
-                    "bufls",
+                    "buf_ls",
                     "clangd",
                     "cmake",
                     "cssls",

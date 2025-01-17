@@ -42,6 +42,7 @@ return {
                     "templ",
                     "ts_ls",
                     "yamlls",
+                    "zig",
                 },
                 automatic_installation = true,
             })

@@ -51,6 +51,12 @@ opt.incsearch = true
 opt.ignorecase = true
 opt.smartcase = true
 
+if vim.loop.os_uname().sysname == "Darwin" then
+    opt.rtp:append("/opt/homebrew/opt/fzf")
+else
+    opt.rtp:append("/usr/bin/fzf")
+end
+
 opt.isfname:append("@-@")
 
 opt.updatetime = 50

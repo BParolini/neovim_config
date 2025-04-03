@@ -47,10 +47,14 @@ local themes = {
         config = function()
             vim.o.termguicolors = true
             require("rose-pine").setup({
-                variant = "auto",
+                variant = "main", -- auto, main, moon, or dawn
                 dark_variant = "main",
                 dim_inactive_windows = false,
                 extend_background_behind_borders = true,
+
+                styles = {
+                    transparency = false,
+                },
             })
 
             vim.cmd.colorscheme("rose-pine")
@@ -77,4 +81,4 @@ local themes = {
     },
 }
 
-return themes.tokyonight
+return themes.catppuccin

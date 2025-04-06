@@ -8,6 +8,7 @@ local themes = {
         lazy = false,
         name = "catppuccin",
         priority = 1000,
+        build = ":CatppuccinCompile",
         config = function()
             vim.o.termguicolors = true
             require("catppuccin").setup({
@@ -18,6 +19,7 @@ local themes = {
                 },
                 transparent_background = true,
                 term_colors = true,
+                compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
             })
 
             vim.cmd.colorscheme("catppuccin-mocha")
@@ -58,6 +60,26 @@ local themes = {
             })
 
             vim.cmd.colorscheme("rose-pine")
+        end,
+    },
+
+    kanagawa = {
+        "rebelot/kanagawa.nvim",
+        lazy = false,
+        priority = 1000,
+        build = ":KanagawaCompile",
+        config = function()
+            vim.o.termguicolors = true
+            require("kanagawa").setup({
+                compile = true,
+                theme = "wave", -- wave, dragon, lotus
+                background = {
+                    dark = "wave",
+                    light = "lotus",
+                },
+            })
+
+            vim.cmd.colorscheme("kanagawa")
         end,
     },
 

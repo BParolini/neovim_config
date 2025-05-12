@@ -1,6 +1,6 @@
 return {
     {
-        "williamboman/mason.nvim",
+        "mason-org/mason.nvim",
         config = function()
             require("mason").setup({
                 ui = {
@@ -10,9 +10,9 @@ return {
         end,
     },
     {
-        "williamboman/mason-lspconfig.nvim",
+        "mason-org/mason-lspconfig.nvim",
         dependencies = {
-            "williamboman/mason.nvim",
+            "mason-org/mason.nvim",
         },
         config = function()
             require("mason-lspconfig").setup({
@@ -52,7 +52,7 @@ return {
     {
         "WhoIsSethDaniel/mason-tool-installer.nvim",
         dependencies = {
-            "williamboman/mason.nvim",
+            "mason-org/mason.nvim",
         },
         opts = {
             ensure_installed = {
@@ -95,8 +95,8 @@ return {
     {
         "neovim/nvim-lspconfig",
         dependencies = {
-            "williamboman/mason.nvim",
-            "williamboman/mason-lspconfig.nvim",
+            "mason-org/mason.nvim",
+            "mason-org/mason-lspconfig.nvim",
             "folke/neodev.nvim",
             { "j-hui/fidget.nvim", opts = {} },
             "b0o/schemastore.nvim",
@@ -377,33 +377,15 @@ return {
     },
     {
         "mrcjkb/rustaceanvim",
-        version = "^5",
+        version = "^6",
         lazy = false,
         dependencies = {
             "nvim-neotest/neotest",
         },
-        config = function()
-            local mason_registry = require("mason-registry")
-            local codelldb = mason_registry.get_package("codelldb")
-            local extension_path = codelldb:get_install_path() .. "/extension/"
-            local codelldb_path = extension_path .. "adapter/codelldb"
-            local liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
-            local cfg = require("rustaceanvim.config")
-
-            vim.g.rustaceanvim = {
-                dap = {
-                    adapter = cfg.get_codelldb_adapter(codelldb_path, liblldb_path),
-                },
-            }
-
-            vim.keymap.set("n", "<leader>dq", function()
-                vim.cmd("RustLsp testables")
-            end, { silent = true, desc = "Debugger testtables" })
-        end,
     },
     {
         "mrcjkb/haskell-tools.nvim",
-        version = "^3", -- Recommended
+        version = "^5", -- Recommended
         ft = { "haskell", "lhaskell", "cabal", "cabalproject" },
         dependencies = {
             "neovim/nvim-lspconfig",

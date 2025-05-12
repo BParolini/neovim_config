@@ -72,7 +72,7 @@ NVIM_APPNAME=BParolini/neovim_config/nvim/dot-config/nvim nvim
 + [j-hui/fidget.nvim](https://dotfyle.com/plugins/j-hui/fidget.nvim)
 ### lsp-installer
 
-+ [williamboman/mason.nvim](https://dotfyle.com/plugins/williamboman/mason.nvim)
++ [mason-org/mason.nvim](https://dotfyle.com/plugins/mason-org/mason.nvim)
 ### marks
 
 + [ThePrimeagen/harpoon](https://dotfyle.com/plugins/ThePrimeagen/harpoon)

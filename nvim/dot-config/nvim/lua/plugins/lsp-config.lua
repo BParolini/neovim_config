@@ -41,6 +41,7 @@ return {
                     "sqls",
                     "tailwindcss",
                     "templ",
+                    "terraformls",
                     "ts_ls",
                     "yamlls",
                     "zls",
@@ -84,6 +85,7 @@ return {
                 "prettier",
                 "shellcheck",
                 "stylua",
+                "terraform",
                 "xmlformatter",
                 "yamlfmt",
                 "yamllint",
@@ -278,6 +280,7 @@ return {
                 "sqls",
                 "tailwindcss",
                 "templ",
+                "terraformls",
                 "ts_ls",
                 "zls",
             }

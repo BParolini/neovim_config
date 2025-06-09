@@ -27,6 +27,7 @@ return {
                     "dockerls",
                     "emmet_ls",
                     "gopls",
+                    "gradle_ls",
                     "helm_ls",
                     "hls",
                     "html",

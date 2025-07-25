@@ -16,6 +16,7 @@ return {
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-nvim-lua",
             "hrsh7th/cmp-cmdline",
+            "folke/lazydev.nvim",
         },
         config = function()
             local cmp = require("cmp")
@@ -28,6 +29,7 @@ return {
                     { name = "buffer" },
                     { name = "path" },
                     { name = "nvim_lua" },
+                    { name = "lazydev", group_index = 0 },
                 }, {
                     { name = "buffer" },
                 }),

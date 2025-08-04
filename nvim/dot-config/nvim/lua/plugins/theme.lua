@@ -9,18 +9,19 @@ local themes = {
         name = "catppuccin",
         priority = 1000,
         build = ":CatppuccinCompile",
-        config = function()
+        opts = {
+            flavour = "mocha",
+            background = {
+                light = "latte",
+                dark = "mocha",
+            },
+            transparent_background = true,
+            term_colors = true,
+            compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
+        },
+        config = function(_, opts)
             vim.o.termguicolors = true
-            require("catppuccin").setup({
-                flavour = "mocha",
-                background = {
-                    light = "latte",
-                    dark = "mocha",
-                },
-                transparent_background = true,
-                term_colors = true,
-                compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
-            })
+            require("catppuccin").setup(opts)
 
             vim.cmd.colorscheme("catppuccin-mocha")
         end,
@@ -46,18 +47,19 @@ local themes = {
         lazy = false,
         name = "rose-pine",
         priority = 1000,
-        config = function()
-            vim.o.termguicolors = true
-            require("rose-pine").setup({
-                variant = "main", -- auto, main, moon, or dawn
-                dark_variant = "main",
-                dim_inactive_windows = false,
-                extend_background_behind_borders = true,
+        opts = {
+            variant = "main", -- auto, main, moon, or dawn
+            dark_variant = "main",
+            dim_inactive_windows = false,
+            extend_background_behind_borders = true,
 
-                styles = {
-                    transparency = false,
-                },
-            })
+            styles = {
+                transparency = false,
+            },
+        },
+        config = function(_, opts)
+            vim.o.termguicolors = true
+            require("rose-pine").setup(opts)
 
             vim.cmd.colorscheme("rose-pine")
         end,
@@ -68,16 +70,17 @@ local themes = {
         lazy = false,
         priority = 1000,
         build = ":KanagawaCompile",
-        config = function()
+        opts = {
+            compile = true,
+            theme = "wave", -- wave, dragon, lotus
+            background = {
+                dark = "wave",
+                light = "lotus",
+            },
+        },
+        config = function(_, opts)
             vim.o.termguicolors = true
-            require("kanagawa").setup({
-                compile = true,
-                theme = "wave", -- wave, dragon, lotus
-                background = {
-                    dark = "wave",
-                    light = "lotus",
-                },
-            })
+            require("kanagawa").setup(opts)
 
             vim.cmd.colorscheme("kanagawa")
         end,

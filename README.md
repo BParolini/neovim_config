@@ -88,7 +88,6 @@ NVIM_APPNAME=BParolini/neovim_config/nvim/dot-config/nvim nvim
 
 + [MunifTanjim/nui.nvim](https://dotfyle.com/plugins/MunifTanjim/nui.nvim)
 + [nvim-lua/plenary.nvim](https://dotfyle.com/plugins/nvim-lua/plenary.nvim)
-+ [folke/neodev.nvim](https://dotfyle.com/plugins/folke/neodev.nvim)
 ### plugin-manager
 
 + [folke/lazy.nvim](https://dotfyle.com/plugins/folke/lazy.nvim)

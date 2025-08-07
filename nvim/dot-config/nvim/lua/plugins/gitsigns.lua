@@ -1,9 +1,5 @@
 return {
     "lewis6991/gitsigns.nvim",
-    config = function(_, opts)
-        local gitsigns = require("gitsigns")
-        gitsigns.setup(opts)
-    end,
     opts = {
         on_attach = function(bufnr)
             local gitsigns = require("gitsigns")

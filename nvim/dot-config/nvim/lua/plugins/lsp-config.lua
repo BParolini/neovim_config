@@ -1,57 +1,53 @@
 return {
     {
         "mason-org/mason.nvim",
-        config = function()
-            require("mason").setup({
-                ui = {
-                    border = "double",
-                },
-            })
-        end,
+        opts = {
+            ui = {
+                border = "double",
+            },
+        },
     },
     {
         "mason-org/mason-lspconfig.nvim",
         dependencies = {
             "mason-org/mason.nvim",
         },
-        config = function()
-            require("mason-lspconfig").setup({
-                ensure_installed = {
-                    "bashls",
-                    "buf_ls",
-                    "clangd",
-                    "clojure_lsp",
-                    "cmake",
-                    "cssls",
-                    "cucumber_language_server",
-                    "docker_compose_language_service",
-                    "dockerls",
-                    "emmet_ls",
-                    "gopls",
-                    "gradle_ls",
-                    "helm_ls",
-                    "hls",
-                    "html",
-                    "htmx",
-                    "jdtls",
-                    "jsonls",
-                    "kotlin_language_server",
-                    "lua_ls",
-                    "marksman",
-                    "ocamllsp",
-                    "postgres_lsp",
-                    "pylsp",
-                    "rust_analyzer",
-                    "tailwindcss",
-                    "templ",
-                    "terraformls",
-                    "ts_ls",
-                    "yamlls",
-                    "zls",
-                },
-                automatic_installation = true,
-            })
-        end,
+        opts = {
+            ensure_installed = {
+                "bashls",
+                "buf_ls",
+                "clangd",
+                "clojure_lsp",
+                "cmake",
+                "cssls",
+                "cucumber_language_server",
+                "docker_compose_language_service",
+                "dockerls",
+                "emmet_ls",
+                "gopls",
+                "gradle_ls",
+                "helm_ls",
+                "hls",
+                "html",
+                "htmx",
+                "jdtls",
+                "jsonls",
+                "kotlin_language_server",
+                "lua_ls",
+                "marksman",
+                "ocamllsp",
+                "postgres_lsp",
+                "pylsp",
+                "rust_analyzer",
+                "tailwindcss",
+                "templ",
+                "terraformls",
+                "ts_ls",
+                "yamlls",
+                "zls",
+            },
+            automatic_installation = true,
+        },
     },
     {
         "WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -112,6 +108,14 @@ return {
 
             require("lspconfig.ui.windows").default_options.border = "double"
 
+            --- @type vim.diagnostic.Opts
+            vim.diagnostic.config({
+                float = true,
+                underline = true,
+                signs = true,
+                virtual_text = true,
+            })
+
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
@@ -132,8 +136,12 @@ return {
                     lsp.buf.workspace_symbol(fn.input("Grep > "))
                 end, { buffer = bufnr, noremap = true, desc = "Find workspace symbol", silent = true })
                 keymap.set("n", "<leader>vd", diagnostic.open_float, { buffer = bufnr, noremap = true, desc = "Show diagnostics window", silent = true })
-                keymap.set("n", "[d", diagnostic.goto_prev, { buffer = bufnr, noremap = true, desc = "Go to previous diagnostic", silent = true })
-                keymap.set("n", "]d", diagnostic.goto_next, { buffer = bufnr, noremap = true, desc = "Go to next diagnostic", silent = true })
+                keymap.set("n", "[d", function()
+                    diagnostic.jump({ count = 1, float = true })
+                end, { buffer = bufnr, noremap = true, desc = "Go to previous diagnostic", silent = true })
+                keymap.set("n", "]d", function()
+                    diagnostic.jump({ count = -1, float = true })
+                end, { buffer = bufnr, noremap = true, desc = "Go to next diagnostic", silent = true })
                 keymap.set("n", "<leader>ca", lsp.buf.code_action, { buffer = bufnr, noremap = true, desc = "Show code actions", silent = true })
                 keymap.set("n", "<leader>vrr", lsp.buf.references, { buffer = bufnr, noremap = true, desc = "Show references", silent = true })
                 keymap.set("n", "<leader>rn", lsp.buf.rename, { buffer = bufnr, noremap = true, desc = "Rename element", silent = true })
@@ -220,7 +228,7 @@ return {
             lspconfig.clangd.setup({
                 on_attach = on_attach,
                 capabilities = capabilities,
-                filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
+                filetypes = { "c", "h", "cpp", "hpp", "objc", "objcpp", "cuda" },
             })
 
             lspconfig.bashls.setup({
@@ -274,29 +282,31 @@ return {
         dependencies = {
             "neovim/nvim-lspconfig",
         },
-        ---@param opts table
-        config = function(_, opts)
-            require("gopher").setup(opts)
-
-            local keymap, fn, cmd = vim.keymap, vim.fn, vim.cmd
-            keymap.set("n", "<leader>gmt", "<cmd>GoMod tidy<CR>", { desc = "Runs go mod tidy" })
-            keymap.set("n", "<leader>gmi", "<cmd>GoMod init<CR>", { desc = "Runs go mod init" })
-
-            keymap.set("n", "<leader>gtaj", "<cmd>GoTagAdd json<CR>", { desc = "Add json tag to struct" })
-            keymap.set("n", "<leader>gtay", "<cmd>GoTagAdd yaml<CR>", { desc = "Add yaml tag to struct" })
-            keymap.set("n", "<leader>gtrj", "<cmd>GoTagRm json<CR>", { desc = "Removes json tag to struct" })
-            keymap.set("n", "<leader>gtry", "<cmd>GoTagRm yaml<CR>", { desc = "Removes yaml tag to struct" })
-
-            keymap.set("n", "<leader>gmd", function()
-                cmd(string.format("GoGet %s", fn.input("Go mod to download (go get): ")))
-            end, { desc = "Runs go get package" })
-
-            keymap.set("n", "<leader>gii", function()
-                cmd(string.format("GoImpl %s", fn.input("package.Interface to implement: ")))
-            end, { desc = "Implement interface for current struct" })
-
-            keymap.set("n", "<leader>gie", "<cmd>GoIfErr<CR>", { desc = "Adds if err != nil" })
-        end,
+        opts = {},
+        ---@type LazyKeysSpec[]
+        keys = {
+            { "<leader>gmt", "<cmd>GoMod tidy<CR>", desc = "Runs go mod tidy" },
+            { "<leader>gmi", "<cmd>GoMod init<CR>", desc = "Runs go mod init" },
+            { "<leader>gtaj", "<cmd>GoTagAdd json<CR>", desc = "Add json tag to struct" },
+            { "<leader>gtay", "<cmd>GoTagAdd yaml<CR>", desc = "Add yaml tag to struct" },
+            { "<leader>gtrj", "<cmd>GoTagRm json<CR>", desc = "Removes json tag to struct" },
+            { "<leader>gtry", "<cmd>GoTagRm yaml<CR>", desc = "Removes yaml tag to struct" },
+            {
+                "<leader>gmd",
+                function()
+                    vim.cmd(string.format("GoGet %s", vim.fn.input("Go mod to download (go get): ")))
+                end,
+                desc = "Runs go get package",
+            },
+            {
+                "<leader>gii",
+                function()
+                    vim.cmd(string.format("GoImpl %s", vim.fn.input("package.Interface to implement: ")))
+                end,
+                desc = "Implement interface for current struct",
+            },
+            { "<leader>gie", "<cmd>GoIfErr<CR>", desc = "Adds if err != nil" },
+        },
         build = function()
             vim.cmd([[silent! GoInstallDeps]])
         end,
@@ -311,16 +321,14 @@ return {
     {
         "nwiizo/cargo.nvim",
         build = "cargo build --release",
-        config = function()
-            require("cargo").setup({
-                float_window = true,
-                window_width = 0.8,
-                window_height = 0.8,
-                border = "rounded",
-                auto_close = true,
-                close_timeout = 5000,
-            })
-        end,
+        opts = {
+            float_window = true,
+            window_width = 0.8,
+            window_height = 0.8,
+            border = "rounded",
+            auto_close = true,
+            close_timeout = 5000,
+        },
         ft = { "rust" },
         cmd = {
             "CargoBench",
@@ -363,7 +371,7 @@ return {
     },
     {
         "mrcjkb/haskell-tools.nvim",
-        version = "^5", -- Recommended
+        version = "^6", -- Recommended
         ft = { "haskell", "lhaskell", "cabal", "cabalproject" },
         dependencies = {
             "neovim/nvim-lspconfig",

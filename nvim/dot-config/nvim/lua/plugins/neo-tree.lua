@@ -6,26 +6,26 @@ return {
         "nvim-tree/nvim-web-devicons",
         "MunifTanjim/nui.nvim",
     },
-    config = function()
-        require("neo-tree").setup({
-            filesystem = {
-                use_libuv_file_watcher = true,
-                filtered_items = {
-                    hide_dotfiles = false,
-                    hide_gitignored = false,
-                    never_show = {
-                        ".DS_Store",
-                        "thumbs.db",
-                        "node_modules",
-                        ".venv",
-                        "venv",
-                    },
+    opts = {
+        filesystem = {
+            use_libuv_file_watcher = true,
+            filtered_items = {
+                hide_dotfiles = false,
+                hide_gitignored = false,
+                never_show = {
+                    ".DS_Store",
+                    "thumbs.db",
+                    "node_modules",
+                    ".venv",
+                    "venv",
                 },
             },
-        })
-        local keymap = vim.keymap
-        keymap.set("n", "<leader>ee", "<cmd>Neotree toggle<CR>", { silent = true, noremap = true, desc = "Toggle file explorer" })
-        keymap.set("n", "<leader>ef", "<cmd>Neotree reveal<CR>", { silent = true, noremap = true, desc = "Toggle file explorer on current file" })
-        keymap.set("n", "<leader>ec", "<cmd>Neotree close<CR>", { silent = true, noremap = true, desc = "Collapse file explorer" })
-    end,
+        },
+    },
+    ---@type LazyKeysSpec[]
+    keys ={
+        { "<leader>ee", "<cmd>Neotree toggle<CR>", noremap = true, desc = "Toggle file explorer" },
+        { "<leader>ef", "<cmd>Neotree reveal<CR>", noremap = true, desc = "Toggle file explorer on current file" },
+        { "<leader>ec", "<cmd>Neotree close<CR>", noremap = true, desc = "Collapse file explorer" },
+    }
 }

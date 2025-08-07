@@ -10,7 +10,7 @@ function M.create_formatting_augroup(client, bufnr)
         clear = false,
     })
 
-    if client.supports_method("textDocument/formatting") then
+    if client:supports_method("textDocument/formatting", bufnr) then
         api.nvim_clear_autocmds({
             group = formattingGroup,
             buffer = bufnr,

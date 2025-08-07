@@ -15,9 +15,8 @@ return {
         "rcarriga/nvim-notify",
         "nvim-treesitter/nvim-treesitter",
     },
-    config = function(_, opts)
-        require("noice").setup(opts)
-
-        vim.keymap.set("n", "<leader>nd", "<cmd>NoiceDismiss<CR>", { noremap = true, silent = true, desc = "Dismiss Noice Messages" })
-    end,
+    ---@type LazyKeysSpec[]
+    keys = {
+        { "<leader>nd", "<cmd>NoiceDismiss<CR>", noremap = true, desc = "Dismiss Noice Messages" },
+    },
 }

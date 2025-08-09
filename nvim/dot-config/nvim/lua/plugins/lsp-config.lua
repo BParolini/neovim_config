@@ -98,6 +98,7 @@ return {
     {
         "neovim/nvim-lspconfig",
         dependencies = {
+            "saghen/blink.cmp",
             "mason-org/mason.nvim",
             "mason-org/mason-lspconfig.nvim",
             { "j-hui/fidget.nvim", opts = {} },
@@ -117,8 +118,7 @@ return {
                 virtual_text = true,
             })
 
-            local capabilities = vim.lsp.protocol.make_client_capabilities()
-            capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+            local capabilities = require("blink.cmp").get_lsp_capabilities()
 
             --- Prepares `on_attach` for LSP clientside
             --- @param client vim.lsp.Client
@@ -338,26 +338,6 @@ return {
             "CargoTest",
             "CargoUpdate",
         },
-    },
-    {
-        "saecki/crates.nvim",
-        ft = { "toml" },
-        config = function()
-            require("crates").setup({
-                completion = {
-                    cmp = {
-                        enabled = true,
-                    },
-                },
-            })
-            require("cmp").setup.buffer({
-                sources = {
-                    {
-                        name = "creates",
-                    },
-                },
-            })
-        end,
     },
     {
         "mrcjkb/rustaceanvim",

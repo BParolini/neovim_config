@@ -22,7 +22,7 @@ local lazy_opts = {
         { import = "plugins" },
     },
     ui = {
-        border = "double",
+        border = "single",
     },
 }
 

@@ -18,6 +18,7 @@ return {
             proto = { "buf" },
             python = { "isort", "autopep8" },
             rust = { "rustfmt", lsp_format = "fallback" },
+            templ = { "templ" },
             terraform = { "terraform_fmt" },
             xml = { "xmlformatter" },
             yaml = { "yamlfmt" },

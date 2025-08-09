@@ -1,19 +1,20 @@
 return {
     {
         "mfussenegger/nvim-dap",
-        ---@type LazyKeysSpec[]
-        keys = {
-            { "<leader>dt", function() require("dap").toggle_breakpoint() end, desc = "Toggle breakpoint" },
-            { "<leader>dT", function() require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc = "Set conditional breakpoint" },
-            { "<leader>dc", function() require("dap").continue() end, desc = "Debug continue" },
-            { "<leader>do", function() require("dap").step_over() end, desc = "Debug step over" },
-            { "<leader>di", function() require("dap").step_into() end, desc = "Debug step into" },
-            { "<leader>dI", function() require("dap").step_out() end, desc = "Debug step out" },
-            { "<leader>ds", function() require("dap").terminate() end, desc = "Debug stop" },
-        },
-        config = function(_, opts)
+        config = function()
             local dap = require("dap")
-            dap.setup(opts)
+            local keymap, fn = vim.keymap, vim.fn
+
+            keymap.set("n", "<leader>dt", dap.toggle_breakpoint, { silent = true, desc = "Toggle breakpoint" })
+            keymap.set("n", "<leader>dT", function()
+                dap.set_breakpoint(fn.input("Breakpoint condition: "))
+            end, { silent = true, desc = "Set conditional breakpoint" })
+            keymap.set("n", "<leader>dc", dap.continue, { silent = true, desc = "Debug continue" })
+            keymap.set("n", "<leader>do", dap.step_over, { silent = true, desc = "Debug step over" })
+            keymap.set("n", "<leader>di", dap.step_into, { silent = true, desc = "Debug step into" })
+            keymap.set("n", "<leader>dI", dap.step_out, { silent = true, desc = "Debug step out" })
+            keymap.set("n", "<leader>ds", dap.terminate, { silent = true, desc = "Debug stop" })
+
             -- telescope-dap
             require("telescope").load_extension("dap")
         end,

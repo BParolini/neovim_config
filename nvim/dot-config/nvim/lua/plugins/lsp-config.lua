@@ -12,6 +12,7 @@ return {
         dependencies = {
             "mason-org/mason.nvim",
         },
+        --- @type MasonLspConfigOpts
         opts = {
             ensure_installed = {
                 "bashls",
@@ -47,6 +48,7 @@ return {
                 "zls",
             },
             automatic_installation = true,
+            automatic_enable = false,
         },
     },
     {
@@ -121,9 +123,9 @@ return {
             local capabilities = require("blink.cmp").get_lsp_capabilities()
 
             --- Prepares `on_attach` for LSP clientside
-            --- @param client vim.lsp.Client
+            --- @param _ vim.lsp.Client
             --- @param bufnr number
-            local on_attach = function(client, bufnr)
+            local on_attach = function(_, bufnr)
                 local keymap, lsp, fn, diagnostic = vim.keymap, vim.lsp, vim.fn, vim.diagnostic
 
                 keymap.set("n", "gd", lsp.buf.definition, { buffer = bufnr, noremap = true, desc = "Go to definition", silent = true })
@@ -142,6 +144,7 @@ return {
                 keymap.set("n", "]d", function()
                     diagnostic.jump({ count = -1, float = true })
                 end, { buffer = bufnr, noremap = true, desc = "Go to next diagnostic", silent = true })
+                keymap.set("n", "<leader>de", diagnostic.open_float, { buffer = bufnr, noremap = true, desc = "Show diagnostic error message" })
                 keymap.set("n", "<leader>ca", lsp.buf.code_action, { buffer = bufnr, noremap = true, desc = "Show code actions", silent = true })
                 keymap.set("n", "<leader>vrr", lsp.buf.references, { buffer = bufnr, noremap = true, desc = "Show references", silent = true })
                 keymap.set("n", "<leader>rn", lsp.buf.rename, { buffer = bufnr, noremap = true, desc = "Rename element", silent = true })

@@ -58,8 +58,8 @@ return {
         },
         opts = {
             ensure_installed = {
-                "autopep8",
                 "beautysh",
+                "black",
                 "buf",
                 "clang-format",
                 "cljfmt",
@@ -76,7 +76,6 @@ return {
                 "golines",
                 "google-java-format",
                 "haskell-debug-adapter",
-                "isort",
                 "jq",
                 "kotlin-debug-adapter",
                 "luacheck",
@@ -132,17 +131,16 @@ return {
                 keymap.set("n", "gi", lsp.buf.implementation, { buffer = bufnr, noremap = true, desc = "Go to implementation", silent = true })
                 keymap.set("n", "gD", lsp.buf.declaration, { buffer = bufnr, noremap = true, desc = "Go to declaration", silent = true })
                 keymap.set("n", "gt", lsp.buf.type_definition, { buffer = bufnr, noremap = true, desc = "Go to type declaration", silent = true })
-                keymap.set("n", "gr", require("telescope.builtin").lsp_references, { buffer = bufnr, noremap = true, desc = "Show references", silent = true })
                 keymap.set("n", "K", lsp.buf.hover, { buffer = bufnr, noremap = true, desc = "Show documentation", silent = true })
                 keymap.set("n", "<leader>lws", function()
                     lsp.buf.workspace_symbol(fn.input("Grep > "))
                 end, { buffer = bufnr, noremap = true, desc = "Find workspace symbol", silent = true })
                 keymap.set("n", "<leader>vd", diagnostic.open_float, { buffer = bufnr, noremap = true, desc = "Show diagnostics window", silent = true })
                 keymap.set("n", "[d", function()
-                    diagnostic.jump({ count = 1, float = true })
+                    diagnostic.jump({ count = -1, float = true })
                 end, { buffer = bufnr, noremap = true, desc = "Go to previous diagnostic", silent = true })
                 keymap.set("n", "]d", function()
-                    diagnostic.jump({ count = -1, float = true })
+                    diagnostic.jump({ count = 1, float = true })
                 end, { buffer = bufnr, noremap = true, desc = "Go to next diagnostic", silent = true })
                 keymap.set("n", "<leader>de", diagnostic.open_float, { buffer = bufnr, noremap = true, desc = "Show diagnostic error message" })
                 keymap.set("n", "<leader>ca", lsp.buf.code_action, { buffer = bufnr, noremap = true, desc = "Show code actions", silent = true })

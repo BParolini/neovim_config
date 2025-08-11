@@ -66,7 +66,6 @@ return {
         keymap.set("n", "<leader>fr", builtin.resume, { desc = "Telescope resume", silent = true })
         keymap.set("n", "<leader>f.", builtin.oldfiles, { desc = "Telescope old files", silent = true })
         keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers", silent = true })
-        keymap.set("n", "<leader>fn", "<cmd>Telescope noice<cr>", { desc = "Telescope noice", silent = true })
 
         keymap.set("n", "<leader>en", function()
             builtin.find_files({

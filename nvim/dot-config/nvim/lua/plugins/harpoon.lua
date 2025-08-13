@@ -1,3 +1,4 @@
+--- @type LazyPluginSpec
 return {
     -- Mark files to jump around more easily
     "ThePrimeagen/harpoon",

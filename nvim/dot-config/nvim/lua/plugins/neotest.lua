@@ -1,5 +1,5 @@
+--- @type LazyPluginSpec
 return {
-    {
         "nvim-neotest/neotest",
         event = "VeryLazy",
         dependencies = {
@@ -25,5 +25,4 @@ return {
                 },
             })
         end,
-    },
 }

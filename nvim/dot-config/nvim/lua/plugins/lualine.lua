@@ -1,3 +1,4 @@
+--- @type string[]
 local themes = {
     "auto",
     "dracula",
@@ -7,6 +8,7 @@ local themes = {
     "catppuccin",
 }
 
+--- @type LazyPluginSpec
 return {
     "nvim-lualine/lualine.nvim",
     dependencies = {

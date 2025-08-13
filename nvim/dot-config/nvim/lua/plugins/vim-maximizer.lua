@@ -1,3 +1,4 @@
+--- @type LazyPluginSpec
 return {
     "szw/vim-maximizer",
     ---@type LazyKeysSpec[]

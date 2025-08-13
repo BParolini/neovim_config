@@ -2,7 +2,9 @@
 -- By configuring things this way, I can have multiple configurations, but Lazy will download
 -- only the used one.
 
+--- @type LazyPluginSpec[]
 local themes = {
+    --- @type LazyPluginSpec
     catppuccin = {
         "catppuccin/nvim",
         lazy = false,
@@ -27,6 +29,7 @@ local themes = {
         end,
     },
 
+    --- @type LazyPluginSpec
     nord = {
         "shaunsingh/nord.nvim",
         lazy = false,
@@ -42,6 +45,7 @@ local themes = {
         end,
     },
 
+    --- @type LazyPluginSpec
     rose_pine = {
         "rose-pine/neovim",
         lazy = false,
@@ -65,6 +69,7 @@ local themes = {
         end,
     },
 
+    --- @type LazyPluginSpec
     kanagawa = {
         "rebelot/kanagawa.nvim",
         lazy = false,
@@ -86,6 +91,7 @@ local themes = {
         end,
     },
 
+    --- @type LazyPluginSpec
     eldritch = {
         "eldritch-theme/eldritch.nvim",
         lazy = false,
@@ -95,6 +101,8 @@ local themes = {
             vim.cmd.colorscheme("eldritch")
         end,
     },
+
+    --- @type LazyPluginSpec
     tokyonight = {
         "folke/tokyonight.nvim",
         lazy = false,

@@ -51,7 +51,7 @@ opt.incsearch = true
 opt.ignorecase = true
 opt.smartcase = true
 
-if vim.loop.os_uname().sysname == "Darwin" then
+if vim.uv.os_uname().sysname == "Darwin" then
     opt.rtp:append("/opt/homebrew/opt/fzf")
 else
     opt.rtp:append("/usr/bin/fzf")

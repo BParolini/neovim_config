@@ -113,10 +113,36 @@ return {
 
             --- @type vim.diagnostic.Opts
             vim.diagnostic.config({
-                float = true,
-                underline = true,
-                signs = true,
-                virtual_text = true,
+                severity_sort = true,
+                --- @type vim.diagnostic.Opts.Float
+                float = { border = "rounded", source = "if_many" },
+                --- @type vim.diagnostic.Opts.Underline
+                underline = { severity = vim.diagnostic.severity.ERROR },
+                --- @type vim.diagnostic.Opts.Signs
+                signs = {
+                    text = {
+                        [vim.diagnostic.severity.ERROR] = "󰅚 ",
+                        [vim.diagnostic.severity.WARN] = "󰀪 ",
+                        [vim.diagnostic.severity.INFO] = "󰋽 ",
+                        [vim.diagnostic.severity.HINT] = "󰌶 ",
+                    },
+                },
+                --- @type vim.diagnostic.Opts.VirtualText
+                virtual_text = {
+                    source = "if_many",
+                    spacing = 2,
+                    --- @param diagnostic vim.Diagnostic
+                    format = function(diagnostic)
+                        local diagnostic_message = {
+                            [vim.diagnostic.severity.ERROR] = diagnostic.message,
+                            [vim.diagnostic.severity.WARN] = diagnostic.message,
+                            [vim.diagnostic.severity.INFO] = diagnostic.message,
+                            [vim.diagnostic.severity.HINT] = diagnostic.message,
+                        }
+
+                        return diagnostic_message[diagnostic.severity]
+                    end,
+                },
             })
 
             local capabilities = require("blink.cmp").get_lsp_capabilities()
@@ -148,14 +174,14 @@ return {
                 keymap.set("n", "<leader>rn", lsp.buf.rename, { buffer = bufnr, noremap = true, desc = "Rename element", silent = true })
                 keymap.set("n", "<leader>he", lsp.buf.signature_help, { buffer = bufnr, noremap = true, desc = "Show signature help", silent = true })
 
-                --- Telescope LSP keybindings
-                local builtin = require("telescope.builtin")
-                keymap.set("n", "<leader>fs", builtin.lsp_document_symbols, { desc = "Telescope lsp document symbols", silent = true })
-                keymap.set("n", "<leader>fS", builtin.lsp_workspace_symbols, { desc = "Telescope lsp workspace symbols", silent = true })
-                keymap.set("n", "<leader>fl", builtin.lsp_references, { desc = "Telescope lsp references", silent = true })
-                keymap.set("n", "<leader>ft", builtin.lsp_dynamic_workspace_symbols, { desc = "Telescope lsp workspace diagnostics", silent = true })
-                keymap.set("n", "<leader>fo", builtin.lsp_definitions, { desc = "Telescope lsp definition", silent = true })
-                keymap.set("n", "<leader>fm", builtin.lsp_implementations, { desc = "Telescope lsp implementations", silent = true })
+                --- FZF LSP keybindings
+                local fzf = require("fzf-lua")
+                keymap.set("n", "<leader>fs", fzf.lsp_document_symbols, { desc = "FZF LSP document symbols", silent = true })
+                keymap.set("n", "<leader>fS", fzf.lsp_workspace_symbols, { desc = "FZF LSP workspace symbols", silent = true })
+                keymap.set("n", "<leader>fl", fzf.lsp_references, { desc = "FZF LSP references", silent = true })
+                keymap.set("n", "<leader>ft", fzf.lsp_live_workspace_symbols, { desc = "FZF LSP workspace diagnostics", silent = true })
+                keymap.set("n", "<leader>fo", fzf.lsp_definitions, { desc = "FZF LSP definition", silent = true })
+                keymap.set("n", "<leader>fm", fzf.lsp_implementations, { desc = "FZF LSP implementations", silent = true })
             end
 
             lspconfig.gopls.setup({

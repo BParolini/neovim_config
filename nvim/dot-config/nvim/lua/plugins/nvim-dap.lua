@@ -14,9 +14,6 @@ return {
             keymap.set("n", "<leader>di", dap.step_into, { silent = true, desc = "Debug step into" })
             keymap.set("n", "<leader>dI", dap.step_out, { silent = true, desc = "Debug step out" })
             keymap.set("n", "<leader>ds", dap.terminate, { silent = true, desc = "Debug stop" })
-
-            -- telescope-dap
-            require("telescope").load_extension("dap")
         end,
     },
     {
@@ -26,10 +23,6 @@ return {
             "mfussenegger/nvim-dap",
             "theHamsta/nvim-dap-virtual-text",
             "nvim-neotest/nvim-nio",
-
-            -- telescope-dap
-            "nvim-telescope/telescope.nvim",
-            "nvim-telescope/telescope-dap.nvim",
         },
         config = function(_, opts)
             local dap, dapui = require("dap"), require("dapui")

@@ -1,12 +1,10 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
+        branch = "master",
+        lazy = false,
         event = { "BufReadPre", "BufNewFile" },
         build = ":TSUpdate",
-        dependencies = {
-            "windwp/nvim-ts-autotag",
-        },
-        ---@type TSConfig
         opts = {
             modules = {},
             ignore_install = {},
@@ -76,10 +74,10 @@ return {
                     node_decremental = "<bs>",
                 },
             },
-            autotag = {
-                enable = true,
-            },
         },
+        config = function(_, opts)
+            require("nvim-treesitter.configs").setup(opts)
+        end,
     },
     {
         "nvim-treesitter/nvim-treesitter-textobjects",

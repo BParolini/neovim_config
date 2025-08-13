@@ -25,6 +25,7 @@ return {
                 "gotmpl",
                 "groovy",
                 "html",
+                "hurl",
                 "java",
                 "javascript",
                 "json",

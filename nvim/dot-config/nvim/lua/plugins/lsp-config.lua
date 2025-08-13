@@ -4,7 +4,7 @@ return {
         "mason-org/mason.nvim",
         opts = {
             ui = {
-                border = "double",
+                border = "rounded",
             },
         },
     },
@@ -13,7 +13,6 @@ return {
         dependencies = {
             "mason-org/mason.nvim",
         },
-        --- @type MasonLspConfigOpts
         opts = {
             ensure_installed = {
                 "bashls",
@@ -110,7 +109,7 @@ return {
             local lspconfig = require("lspconfig")
             local util = require("lspconfig/util")
 
-            require("lspconfig.ui.windows").default_options.border = "double"
+            require("lspconfig.ui.windows").default_options.border = "rounded"
 
             --- @type vim.diagnostic.Opts
             vim.diagnostic.config({
@@ -183,6 +182,7 @@ return {
                 keymap.set("n", "<leader>ft", fzf.lsp_live_workspace_symbols, { desc = "FZF LSP workspace diagnostics", silent = true })
                 keymap.set("n", "<leader>fo", fzf.lsp_definitions, { desc = "FZF LSP definition", silent = true })
                 keymap.set("n", "<leader>fm", fzf.lsp_implementations, { desc = "FZF LSP implementations", silent = true })
+                keymap.set("n", "<leader>fc", fzf.lsp_code_actions, { desc = "FZF LSP code actions", silent = true })
             end
 
             lspconfig.gopls.setup({

@@ -13,17 +13,17 @@ return {
             nerd_font_variant = "mono",
         },
         completion = {
-            menu = { border = "single" },
+            menu = { border = "rounded" },
             documentation = {
                 auto_show = true,
                 window = {
-                    border = "single",
+                    border = "rounded",
                 },
             },
         },
         signature = {
             window = {
-                border = "single",
+                border = "rounded",
             },
             enabled = true,
         },

@@ -12,6 +12,7 @@ opt.signcolumn = "yes"
 opt.colorcolumn = "100"
 opt.cmdheight = 1
 opt.completeopt = "menuone,noinsert,noselect"
+opt.winborder = "rounded"
 
 -- Tab / indentation
 opt.tabstop = 4

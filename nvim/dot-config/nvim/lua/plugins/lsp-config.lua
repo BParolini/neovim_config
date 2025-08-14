@@ -158,9 +158,6 @@ return {
                 keymap.set("n", "gD", lsp.buf.declaration, { buffer = bufnr, noremap = true, desc = "Go to declaration", silent = true })
                 keymap.set("n", "gt", lsp.buf.type_definition, { buffer = bufnr, noremap = true, desc = "Go to type declaration", silent = true })
                 keymap.set("n", "K", lsp.buf.hover, { buffer = bufnr, noremap = true, desc = "Show documentation", silent = true })
-                keymap.set("n", "<leader>lws", function()
-                    lsp.buf.workspace_symbol(fn.input("Grep > "))
-                end, { buffer = bufnr, noremap = true, desc = "Find workspace symbol", silent = true })
                 keymap.set("n", "<leader>vd", diagnostic.open_float, { buffer = bufnr, noremap = true, desc = "Show diagnostics window", silent = true })
                 keymap.set("n", "[d", function()
                     diagnostic.jump({ count = -1, float = true })
@@ -170,8 +167,7 @@ return {
                 end, { buffer = bufnr, noremap = true, desc = "Go to next diagnostic", silent = true })
                 keymap.set("n", "<leader>de", diagnostic.open_float, { buffer = bufnr, noremap = true, desc = "Show diagnostic error message" })
                 keymap.set("n", "<leader>ca", lsp.buf.code_action, { buffer = bufnr, noremap = true, desc = "Show code actions", silent = true })
-                keymap.set("n", "<leader>vrr", lsp.buf.references, { buffer = bufnr, noremap = true, desc = "Show references", silent = true })
-                keymap.set("n", "<leader>rn", lsp.buf.rename, { buffer = bufnr, noremap = true, desc = "Rename element", silent = true })
+                keymap.set("n", "<leader>cr", lsp.buf.rename, { buffer = bufnr, noremap = true, desc = "Rename element", silent = true })
                 keymap.set("n", "<leader>he", lsp.buf.signature_help, { buffer = bufnr, noremap = true, desc = "Show signature help", silent = true })
 
                 --- FZF LSP keybindings

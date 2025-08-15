@@ -7,7 +7,7 @@ api.nvim_create_augroup("TextGroup", {
 api.nvim_create_autocmd("TextYankPost", {
     group = "TextGroup",
     callback = function()
-        vim.highlight.on_yank({
+        vim.hl.on_yank({
             higroup = "IncSearch",
             timeout = 300,
         })

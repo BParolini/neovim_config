@@ -24,9 +24,9 @@ return {
         },
     },
     ---@type LazyKeysSpec[]
-    keys ={
+    keys = {
         { "<leader>ee", "<cmd>Neotree toggle<CR>", noremap = true, desc = "Toggle file explorer" },
         { "<leader>ef", "<cmd>Neotree reveal<CR>", noremap = true, desc = "Toggle file explorer on current file" },
         { "<leader>ec", "<cmd>Neotree close<CR>", noremap = true, desc = "Collapse file explorer" },
-    }
+    },
 }

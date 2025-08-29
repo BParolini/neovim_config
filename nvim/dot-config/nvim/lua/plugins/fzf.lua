@@ -84,7 +84,7 @@ return {
             desc = "FZF buffers",
         },
         {
-            "<leader>fc",
+            "<leader>fi",
             function()
                 require("fzf-lua").files({
                     cwd = vim.fn.stdpath("config")

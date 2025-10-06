@@ -7,7 +7,6 @@ return {
         formatters_by_ft = {
             bash = { "beautysh" },
             c = { "clang-format" },
-            closjure = { "cljfmt" },
             cmake = { "cmake_format" },
             cpp = { "clang-format" },
             css = { "prettierd", "prettier", stop_after_first = true },
@@ -19,7 +18,6 @@ return {
             less = { "prettierd", "prettier", stop_after_first = true },
             lua = { "stylua" },
             markdown = { "markdownlint" },
-            ocaml = { "ocamlformat" },
             proto = { "buf" },
             python = { "black" },
             rust = { "rustfmt", lsp_format = "fallback" },

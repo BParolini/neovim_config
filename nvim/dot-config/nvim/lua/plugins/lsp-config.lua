@@ -101,11 +101,9 @@ return {
             },
         },
         config = function()
-            local lspconfig = require("lspconfig")
-            local util = require("lspconfig/util")
-
             require("lspconfig.ui.windows").default_options.border = "rounded"
 
+            --- Config diagnostic messages
             --- @type vim.diagnostic.Opts
             vim.diagnostic.config({
                 severity_sort = true,
@@ -140,127 +138,33 @@ return {
                 },
             })
 
-            local capabilities = require("blink.cmp").get_lsp_capabilities()
+            vim.lsp.enable({
+                "gopls",
+                "pylsp",
+                "jsonls",
+                "yamlls",
+                "clangd",
+                "bashls",
+                "html",
+                "htmx",
 
-            --- Prepares `on_attach` for LSP clientside
-            --- @param _ vim.lsp.Client
-            --- @param bufnr number
-            local on_attach = function(_, bufnr)
-                local keymap, lsp, fn, diagnostic = vim.keymap, vim.lsp, vim.fn, vim.diagnostic
-
-                keymap.set("n", "gd", lsp.buf.definition, { buffer = bufnr, noremap = true, desc = "Go to definition", silent = true })
-                keymap.set("n", "gi", lsp.buf.implementation, { buffer = bufnr, noremap = true, desc = "Go to implementation", silent = true })
-                keymap.set("n", "gD", lsp.buf.declaration, { buffer = bufnr, noremap = true, desc = "Go to declaration", silent = true })
-                keymap.set("n", "gt", lsp.buf.type_definition, { buffer = bufnr, noremap = true, desc = "Go to type declaration", silent = true })
-                keymap.set("n", "K", lsp.buf.hover, { buffer = bufnr, noremap = true, desc = "Show documentation", silent = true })
-                keymap.set("n", "<leader>vd", diagnostic.open_float, { buffer = bufnr, noremap = true, desc = "Show diagnostics window", silent = true })
-                keymap.set("n", "[d", function()
-                    diagnostic.jump({ count = -1, float = true })
-                end, { buffer = bufnr, noremap = true, desc = "Go to previous diagnostic", silent = true })
-                keymap.set("n", "]d", function()
-                    diagnostic.jump({ count = 1, float = true })
-                end, { buffer = bufnr, noremap = true, desc = "Go to next diagnostic", silent = true })
-                keymap.set("n", "<leader>de", diagnostic.open_float, { buffer = bufnr, noremap = true, desc = "Show diagnostic error message" })
-                keymap.set("n", "<leader>ca", lsp.buf.code_action, { buffer = bufnr, noremap = true, desc = "Show code actions", silent = true })
-                keymap.set("n", "<leader>cr", lsp.buf.rename, { buffer = bufnr, noremap = true, desc = "Rename element", silent = true })
-                keymap.set("n", "<leader>he", lsp.buf.signature_help, { buffer = bufnr, noremap = true, desc = "Show signature help", silent = true })
-
-                --- FZF LSP keybindings
-                local fzf = require("fzf-lua")
-                keymap.set("n", "<leader>fs", fzf.lsp_document_symbols, { desc = "FZF LSP document symbols", silent = true })
-                keymap.set("n", "<leader>fS", fzf.lsp_workspace_symbols, { desc = "FZF LSP workspace symbols", silent = true })
-                keymap.set("n", "<leader>fl", fzf.lsp_references, { desc = "FZF LSP references", silent = true })
-                keymap.set("n", "<leader>ft", fzf.lsp_live_workspace_symbols, { desc = "FZF LSP workspace diagnostics", silent = true })
-                keymap.set("n", "<leader>fo", fzf.lsp_definitions, { desc = "FZF LSP definition", silent = true })
-                keymap.set("n", "<leader>fm", fzf.lsp_implementations, { desc = "FZF LSP implementations", silent = true })
-                keymap.set("n", "<leader>fc", fzf.lsp_code_actions, { desc = "FZF LSP code actions", silent = true })
-            end
-
-            lspconfig.gopls.setup({
-                on_attach = on_attach,
-                capabilities = capabilities,
-                cmd = { "gopls" },
-                filetypes = { "go", "gomod", "gowork", "gotmpl" },
-                root_dir = util.root_pattern("go.work", "go.mod", ".git"),
-                settings = {
-                    gopls = {
-                        completeUnimported = true,
-                        usePlaceholders = true,
-                        analyses = {
-                            unusedparams = true,
-                        },
-                        staticcheck = true,
-                    },
-                },
+                "buf_ls",
+                "cmake",
+                "cssls",
+                "cucumber_language_server",
+                "docker_compose_language_service",
+                "dockerls",
+                "emmet_ls",
+                "jdtls",
+                "kotlin_language_server",
+                "lua_ls",
+                "marksman",
+                "postgres_lsp",
+                "tailwindcss",
+                "templ",
+                "terraformls",
+                "ts_ls",
             })
-
-            lspconfig.pylsp.setup({
-                on_attach = on_attach,
-                capabilities = capabilities,
-                filetypes = { "python" },
-                settings = {
-                    pylsp = {
-                        configurationSources = { "flake8" },
-                        plugins = {
-                            autopepe8 = {
-                                enabled = false,
-                            },
-                            flake8 = {
-                                enabled = true,
-                                config = ".flake8",
-                            },
-                        },
-                    },
-                },
-            })
-
-            local schemastore = require("schemastore")
-            lspconfig.jsonls.setup({
-                on_attach = on_attach,
-                capabilities = capabilities,
-                settings = {
-                    json = {
-                        schemas = schemastore.json.schemas(),
-                        validate = {
-                            enable = true,
-                        },
-                    },
-                },
-            })
-
-            lspconfig.yamlls.setup({
-                on_attach = on_attach,
-                capabilities = capabilities,
-                settings = {
-                    yaml = {
-                        schemastore = {
-                            enable = false,
-                            url = "",
-                        },
-                        schemas = schemastore.yaml.schemas(),
-                    },
-                },
-            })
-
-            lspconfig.clangd.setup({
-                on_attach = on_attach,
-                capabilities = capabilities,
-                filetypes = { "c", "h", "cpp", "hpp", "objc", "objcpp", "cuda" },
-            })
-
-            lspconfig.bashls.setup({
-                on_attach = on_attach,
-                capabilities = capabilities,
-                filetypes = { "bash", "zsh", "sh" },
-            })
-
-            for _, lsp in ipairs({ "html", "htmx" }) do
-                lspconfig[lsp].setup({
-                    on_attach = on_attach,
-                    capabilities = capabilities,
-                    filetypes = { "html", "templ" },
-                })
-            end
 
             local lsps = {
                 "buf_ls",
@@ -281,8 +185,10 @@ return {
                 "ts_ls",
             }
 
+            local on_attach = require("config.lsp_onattach")
+            local capabilities = require("blink.cmp").get_lsp_capabilities()
             for _, lsp_item in ipairs(lsps) do
-                lspconfig[lsp_item].setup({
+                vim.lsp.config(lsp_item, {
                     on_attach = on_attach,
                     capabilities = capabilities,
                 })

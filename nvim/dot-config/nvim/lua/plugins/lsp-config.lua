@@ -138,61 +138,39 @@ return {
                 },
             })
 
-            vim.lsp.enable({
-                "gopls",
-                "pylsp",
-                "jsonls",
-                "yamlls",
-                "clangd",
-                "bashls",
-                "html",
-                "htmx",
-
-                "buf_ls",
-                "cmake",
-                "cssls",
-                "cucumber_language_server",
-                "docker_compose_language_service",
-                "dockerls",
-                "emmet_ls",
-                "jdtls",
-                "kotlin_language_server",
-                "lua_ls",
-                "marksman",
-                "postgres_lsp",
-                "tailwindcss",
-                "templ",
-                "terraformls",
-                "ts_ls",
+            local on_attach = require("config.lsp_onattach").on_attach
+            local capabilities = require("blink.cmp").get_lsp_capabilities()
+            vim.lsp.config("*", {
+                on_attach = on_attach,
+                capabilities = capabilities,
             })
 
-            local lsps = {
+            vim.lsp.enable({
+                "bashls",
                 "buf_ls",
+                "clangd",
                 "cmake",
                 "cssls",
                 "cucumber_language_server",
                 "docker_compose_language_service",
                 "dockerls",
                 "emmet_ls",
+                "gopls",
+                "html",
+                "htmx",
                 "jdtls",
+                "jsonls",
                 "kotlin_language_server",
                 "lua_ls",
                 "marksman",
                 "postgres_lsp",
+                "pylsp",
                 "tailwindcss",
                 "templ",
                 "terraformls",
                 "ts_ls",
-            }
-
-            local on_attach = require("config.lsp_onattach")
-            local capabilities = require("blink.cmp").get_lsp_capabilities()
-            for _, lsp_item in ipairs(lsps) do
-                vim.lsp.config(lsp_item, {
-                    on_attach = on_attach,
-                    capabilities = capabilities,
-                })
-            end
+                "yamlls",
+            })
         end,
     },
     {

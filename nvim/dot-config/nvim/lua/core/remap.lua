@@ -15,6 +15,8 @@ keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 keymap.set("n", "J", "mzJ`z", { desc = "Join lines without moving the cursor" })
 keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scrolls half a page down keeping the cursor in the middle" })
 keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scrolls half a page up keeping the cursor in the middle" })
+keymap.set("n", "<C-f>", "<C-f>zz", { desc = "Scrolls a page down keeping the cursor in the middle" })
+keymap.set("n", "<C-b>", "<C-b>zz", { desc = "Scrolls a page up keeping the cursor in the middle" })
 keymap.set("n", "n", "nzzzv")
 keymap.set("n", "N", "Nzzzv")
 

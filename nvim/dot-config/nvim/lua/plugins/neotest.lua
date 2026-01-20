@@ -18,9 +18,7 @@ return {
                     require("neotest-plenary"),
                     require("rustaceanvim.neotest"),
                     require("neotest-go"),
-                    require("neotest-java")({
-                        ignore_wrapper = false,
-                    }),
+                    require("neotest-java"),
                     require("neotest-python"),
                 },
             })

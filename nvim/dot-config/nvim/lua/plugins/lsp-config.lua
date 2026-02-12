@@ -95,10 +95,7 @@ return {
             "mason-org/mason.nvim",
             "mason-org/mason-lspconfig.nvim",
             { "j-hui/fidget.nvim", opts = {} },
-            {
-                "b0o/schemastore.nvim",
-                url = "git@github.com:b0o/SchemaStore.nvim.git",
-            },
+            "b0o/schemastore.nvim",
         },
         config = function()
             require("lspconfig.ui.windows").default_options.border = "rounded"
@@ -240,7 +237,6 @@ return {
     },
     {
         "mrcjkb/rustaceanvim",
-        url = "git@github.com:mrcjkb/rustaceanvim.git",
         version = "^6",
         lazy = false,
         dependencies = {

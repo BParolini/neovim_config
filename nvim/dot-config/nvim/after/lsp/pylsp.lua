@@ -1,5 +1,6 @@
+---@type vim.lsp.Config
 return {
-    filetypes = { "python" },
+    ---@type lspconfig.settings.pylsp
     settings = {
         pylsp = {
             configurationSources = { "flake8" },

@@ -5,7 +5,6 @@ local themes = {
     "gruvbox",
     "nord",
     "tokyonight",
-    "catppuccin",
 }
 
 --- @type LazyPluginSpec
@@ -17,7 +16,7 @@ return {
     opts = {
         options = {
             icons_enabled = true,
-            theme = themes[6],
+            theme = themes[1],
         },
     },
 }

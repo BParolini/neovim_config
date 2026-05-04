@@ -17,14 +17,6 @@ api.nvim_create_autocmd("FileType", {
 })
 
 api.nvim_create_autocmd("FileType", {
-    pattern = { "ml" },
-    group = "FileTypeSpecific",
-    callback = function()
-        opt.rtp:append(os.getenv("HOME") .. "/.opam/default/share/ocp-indent/vim")
-    end,
-})
-
-api.nvim_create_autocmd("FileType", {
     pattern = "jproperties",
     group = "FileTypeSpecific",
     callback = function()

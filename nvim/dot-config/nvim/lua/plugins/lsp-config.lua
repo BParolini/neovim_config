@@ -76,7 +76,6 @@ return {
                 "prettierd",
                 "shellcheck",
                 "stylua",
-                "terraform",
                 "tflint",
                 "xmlformatter",
                 "yamlfmt",

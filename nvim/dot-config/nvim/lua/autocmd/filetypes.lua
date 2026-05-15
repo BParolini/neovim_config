@@ -6,7 +6,7 @@ api.nvim_create_augroup("FileTypeSpecific", {
 })
 
 api.nvim_create_autocmd("FileType", {
-    pattern = { "go", "make" },
+    pattern = { "*.go", "[Mm]akefile" },
     group = "FileTypeSpecific",
     callback = function()
         opt.expandtab = false
@@ -21,6 +21,31 @@ api.nvim_create_autocmd("FileType", {
     group = "FileTypeSpecific",
     callback = function()
         opt.fileencoding = "ISO-8859-1"
+    end,
+})
+
+api.nvim_create_autocmd("FileType", {
+    pattern = {
+            "*.css",
+            "*.html",
+            "*.htmx",
+            "*.js",
+            "*.json",
+            "*.jsx",
+            "*.less",
+            "*.scss",
+            "*.ts",
+            "*.tsx",
+            "*.vue",
+            "*.xml",
+            "*.xsd",
+            "*.yaml",
+    },
+    group = "FileTypeSpecific",
+    callback = function()
+        opt.tabstop = 2
+        opt.shiftwidth = 2
+        opt.softtabstop = 2
     end,
 })
 -- endregion

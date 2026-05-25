@@ -1,3 +1,5 @@
+require("vim._core.ui2").enable({})
+
 require("core.set")
 
 vim.g.mapleader = " "

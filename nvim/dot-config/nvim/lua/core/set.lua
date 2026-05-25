@@ -1,13 +1,14 @@
 local opt = vim.opt
 
 -- Appearance
+vim.g.netrw_banner = 0
 opt.background = "dark"
 opt.nu = true
 opt.relativenumber = true
 opt.termguicolors = true
 opt.cursorline = true
-opt.scrolloff = 5
-opt.sidescrolloff = 5
+opt.scrolloff = 8
+opt.sidescrolloff = 8
 opt.signcolumn = "yes"
 opt.colorcolumn = "100"
 opt.cmdheight = 1
@@ -31,7 +32,7 @@ opt.hidden = true
 opt.errorbells = false
 opt.swapfile = false
 opt.backup = false
-opt.undodir = { os.getenv("HOME") .. "/.vim/undodir" }
+opt.undodir = { vim.fn.stdpath("data") .. "/undodir" }
 opt.undofile = true
 opt.backspace = "indent,eol,start"
 opt.splitright = true

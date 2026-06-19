@@ -22,6 +22,10 @@ keymap.set("n", "N", "Nzzzv")
 
 keymap.set("n", "Q", "<nop>")
 
+-- New Buffers
+keymap.set("n", "<leader>nv", "<cmd>vnew<CR>", { silent = true, desc = "Creates a new vertical buffer" })
+keymap.set("n", "<leader>nh", "<cmd>new<CR>", { silent = true, desc = "Creates a new horizontal buffer" })
+
 -- Quickfix keymaps
 keymap.set("n", "<leader>qo", "<cmd>copen<CR>", { desc = "Opens the quickfix window" })
 keymap.set("n", "<leader>qx", "<cmd>cclose<CR>", { desc = "Closeds the quickfix window" })
@@ -37,7 +41,7 @@ keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Ma
 
 keymap.set("n", "<leader><leader>", "<cmd>source %<CR>", { desc = "Sources the current file" })
 
-keymap.set("n", "<leader>nh", "<cmd>nohl<CR>", { silent = true, desc = "Clear search highlights" })
+keymap.set("n", "<leader>ch", "<cmd>nohl<CR>", { silent = true, desc = "Clear search highlights" })
 
 -- setting keymaps for the system clipboard
 keymap.set({ "n", "v" }, "<leader>y", '"*y', { silent = true, desc = "Yank selected text to system clipboard" })

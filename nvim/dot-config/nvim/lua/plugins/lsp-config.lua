@@ -15,6 +15,7 @@ return {
         },
         opts = {
             ensure_installed = {
+                "asm_lsp",
                 "bashls",
                 "buf_ls",
                 "clangd",
@@ -53,6 +54,7 @@ return {
         },
         opts = {
             ensure_installed = {
+                "asmfmt",
                 "beautysh",
                 "black",
                 "buf",
@@ -141,6 +143,7 @@ return {
             })
 
             vim.lsp.enable({
+                "asm_lsp",
                 "bashls",
                 "buf_ls",
                 "clangd",
